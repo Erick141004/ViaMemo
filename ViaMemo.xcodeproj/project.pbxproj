@@ -13,6 +13,10 @@
 		AB81ABD82D4BEEB60021D7E6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB81ABD72D4BEEB60021D7E6 /* Preview Assets.xcassets */; };
 		AB81ABDA2D4BEEB60021D7E6 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB81ABD92D4BEEB60021D7E6 /* Persistence.swift */; };
 		AB81ABDD2D4BEEB60021D7E6 /* ViaMemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AB81ABDB2D4BEEB60021D7E6 /* ViaMemo.xcdatamodeld */; };
+		AB81ABEB2D4C1F3E0021D7E6 /* SwiftData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB81ABEA2D4C1F3E0021D7E6 /* SwiftData.swift */; };
+		AB81ABEF2D4C1F6A0021D7E6 /* CardInicial.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB81ABEE2D4C1F6A0021D7E6 /* CardInicial.swift */; };
+		AB81ABF12D4C1F730021D7E6 /* TesteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB81ABF02D4C1F730021D7E6 /* TesteView.swift */; };
+		AB81ABF32D4C1F900021D7E6 /* TelaInicial.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB81ABF22D4C1F900021D7E6 /* TelaInicial.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +27,10 @@
 		AB81ABD72D4BEEB60021D7E6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AB81ABD92D4BEEB60021D7E6 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		AB81ABDC2D4BEEB60021D7E6 /* ViaMemo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ViaMemo.xcdatamodel; sourceTree = "<group>"; };
+		AB81ABEA2D4C1F3E0021D7E6 /* SwiftData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftData.swift; sourceTree = "<group>"; };
+		AB81ABEE2D4C1F6A0021D7E6 /* CardInicial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInicial.swift; sourceTree = "<group>"; };
+		AB81ABF02D4C1F730021D7E6 /* TesteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TesteView.swift; sourceTree = "<group>"; };
+		AB81ABF22D4C1F900021D7E6 /* TelaInicial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaInicial.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +93,7 @@
 		AB81ABE42D4C16DF0021D7E6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AB81ABF02D4C1F730021D7E6 /* TesteView.swift */,
 				AB81ABE72D4C17010021D7E6 /* Screens */,
 				AB81ABE62D4C16F80021D7E6 /* Components */,
 			);
@@ -102,6 +111,7 @@
 		AB81ABE62D4C16F80021D7E6 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				AB81ABEE2D4C1F6A0021D7E6 /* CardInicial.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -109,6 +119,7 @@
 		AB81ABE72D4C17010021D7E6 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				AB81ABF22D4C1F900021D7E6 /* TelaInicial.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -125,6 +136,7 @@
 		AB81ABE92D4C17480021D7E6 /* SwiftData */ = {
 			isa = PBXGroup;
 			children = (
+				AB81ABEA2D4C1F3E0021D7E6 /* SwiftData.swift */,
 			);
 			path = SwiftData;
 			sourceTree = "<group>";
@@ -201,8 +213,12 @@
 			files = (
 				AB81ABDA2D4BEEB60021D7E6 /* Persistence.swift in Sources */,
 				AB81ABD32D4BEEB50021D7E6 /* ContentView.swift in Sources */,
+				AB81ABF12D4C1F730021D7E6 /* TesteView.swift in Sources */,
+				AB81ABF32D4C1F900021D7E6 /* TelaInicial.swift in Sources */,
 				AB81ABDD2D4BEEB60021D7E6 /* ViaMemo.xcdatamodeld in Sources */,
 				AB81ABD12D4BEEB50021D7E6 /* ViaMemoApp.swift in Sources */,
+				AB81ABEB2D4C1F3E0021D7E6 /* SwiftData.swift in Sources */,
+				AB81ABEF2D4C1F6A0021D7E6 /* CardInicial.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
