@@ -9,7 +9,17 @@ import SwiftUI
 
 struct TelaInicial: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        ZStack{
+            Image("ImagemPrincipal")
+                .resizable()
+                .ignoresSafeArea()
+            
+            VStack(){
+                Text("Teste")
+            }
+            .background(Color("verdePrincipal"))
+        }
     }
 }
 
