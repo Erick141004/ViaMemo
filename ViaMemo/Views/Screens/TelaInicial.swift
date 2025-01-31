@@ -9,7 +9,17 @@ import SwiftUI
 
 struct TelaInicial: View {
     var body: some View {
-        Text("Hello Word")
+        
+        ZStack{
+            Image("ImagemPrincipal")
+                .resizable()
+                .ignoresSafeArea()
+            
+            VStack(){
+                Text("Teste")
+            }
+            .background(Color("verdePrincipal"))
+        }
     }
 }
 
