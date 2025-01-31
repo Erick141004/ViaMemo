@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB5BFE242D4D646B006D4EED /* BotaoCategoria.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5BFE232D4D646B006D4EED /* BotaoCategoria.swift */; };
 		AB81ABD12D4BEEB50021D7E6 /* ViaMemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB81ABD02D4BEEB50021D7E6 /* ViaMemoApp.swift */; };
 		AB81ABD32D4BEEB50021D7E6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB81ABD22D4BEEB50021D7E6 /* ContentView.swift */; };
 		AB81ABD52D4BEEB60021D7E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB81ABD42D4BEEB60021D7E6 /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AB5BFE232D4D646B006D4EED /* BotaoCategoria.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BotaoCategoria.swift; sourceTree = "<group>"; };
 		AB81ABCD2D4BEEB50021D7E6 /* ViaMemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViaMemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB81ABD02D4BEEB50021D7E6 /* ViaMemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViaMemoApp.swift; sourceTree = "<group>"; };
 		AB81ABD22D4BEEB50021D7E6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				AB81ABEE2D4C1F6A0021D7E6 /* CardInicial.swift */,
+				AB5BFE232D4D646B006D4EED /* BotaoCategoria.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 			files = (
 				AB81ABDA2D4BEEB60021D7E6 /* Persistence.swift in Sources */,
 				AB81ABD32D4BEEB50021D7E6 /* ContentView.swift in Sources */,
+				AB5BFE242D4D646B006D4EED /* BotaoCategoria.swift in Sources */,
 				AB81ABF12D4C1F730021D7E6 /* TesteView.swift in Sources */,
 				AB81ABF32D4C1F900021D7E6 /* TelaInicial.swift in Sources */,
 				AB81ABDD2D4BEEB60021D7E6 /* ViaMemo.xcdatamodeld in Sources */,
