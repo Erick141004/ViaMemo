@@ -13,7 +13,7 @@ struct ViaMemoApp: App {
 
     var body: some Scene {
         WindowGroup {
-            TelaInicial()
+            TabBar()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

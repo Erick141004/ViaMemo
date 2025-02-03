@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct TabBar: View {
+    let contexto = PersistenceController.shared.container.viewContext
     var body: some View {
         TabView {
-            NavigationStack{
-                TelaDesejosView()
+            NavigationView{
+                TelaDesejosView(contexto: contexto)
             }
             .tabItem {
                 Label("Lista de Desejos", systemImage: "square.and.pencil")

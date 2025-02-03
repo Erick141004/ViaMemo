@@ -7,23 +7,18 @@
 
 import SwiftUI
 
-struct LocalDesejo {
-    var titulo: String
-    var local: String
-}
-
 struct CardDesejo: View {
-    var desejo: LocalDesejo
+    var desejo: ListaDesejos
     var body: some View {
         VStack (alignment: .leading){
             HStack(spacing: 20){
                 Image(uiImage: .pin)
                 VStack(alignment: .leading){
-                    Text(desejo.titulo)
+                    Text(desejo.titulo ?? "Sem título")
                         .foregroundStyle(.white)
                         .fontWeight(.bold)
                         .lineLimit(2)
-                    Text(desejo.local)
+                    Text(desejo.local ?? "Local Desconhecido")
                         .foregroundColor(.white)
                 }
                 .frame(width: 170, alignment: .leading)
@@ -35,12 +30,3 @@ struct CardDesejo: View {
         .clipShape(RoundedRectangle(cornerRadius: 15))
     }
 }
-
-struct CardDesejo_Previews: PreviewProvider {
-    static var previews: some View {
-        let desejo = LocalDesejo(titulo: "Praia dos Morangos", local: "Santo Amaro, SP")
-        CardDesejo(desejo: desejo)
-    }
-}
-
-

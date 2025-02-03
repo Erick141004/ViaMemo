@@ -8,42 +8,45 @@
 import SwiftUI
 
 struct SheetDesejo: View {
-    @State private var titulo = ""
-    @State private var local = ""
-    @Binding var desejos: [LocalDesejo]
+    @ObservedObject var viewModel: TelaDesejosViewModel
     @Environment(\.dismiss) var dismiss
-    var maxCaracter = 50
     
+    private var podeSalvar: Bool {
+        return !viewModel.titulo.isEmpty && !viewModel.local.isEmpty
+    }
+
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("Título")
-                .font(.headline)
+        NavigationView {
+            Form {
+                Section(header: Text("Título")) {
+                    TextField("Digite o nome do local que deseja visitar", text: $viewModel.titulo)
+                }
             
-            TextField("Digite o nome do local que deseja visitar", text: $titulo)
-            
-            Text("Localização")
-                .font(.headline)
-            
-            TextField("Digite o local", text: $local)
-            
-            Button("Adicionar Desejo") {
-                if !titulo.isEmpty {
-                    let novoDesejo = LocalDesejo(titulo: titulo, local: local)
-                    desejos.append(novoDesejo)
-                    dismiss()
+                Section(header: Text("Local")) {
+                    TextField("Digite o local", text: $viewModel.local)
                 }
             }
-            .padding()
-            .background(Color.purple)
-            .foregroundColor(.white)
-            .cornerRadius(10)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Cancelar") {
+                       dismiss()
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Criar") {
+                        if !viewModel.titulo.isEmpty {
+                            viewModel.adicionarDesejo(titulo: viewModel.titulo, local: viewModel.local)
+                            
+                            viewModel.titulo = ""
+                            viewModel.local = ""
+                            
+                            dismiss()
+                        }
+                    }
+                    .disabled(!podeSalvar)
+                }
+            }
         }
-        .padding()
-    }
-}
-
-struct SheetDesejo_Previews: PreviewProvider {
-    static var previews: some View {
-        SheetDesejo(desejos: .constant([]))
+        
     }
 }

@@ -7,14 +7,12 @@
 
 import CoreData
 
-import CoreData
-
 struct PersistenceController {
     static let shared = PersistenceController()
 
     let container: NSPersistentContainer
 
-    init(inMemory: Bool = false) {
+    init(inMemory: Bool = false) { 
         container = NSPersistentContainer(name: "ViaMemo")
         if inMemory {
             container.persistentStoreDescriptions.first?.url = URL(fileURLWithPath: "/dev/null")

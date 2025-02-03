@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AB5BFE242D4D646B006D4EED /* BotaoCategoria.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5BFE232D4D646B006D4EED /* BotaoCategoria.swift */; };
 		42573E782D4D3F0500A34AF0 /* CardDesejo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42573E772D4D3F0500A34AF0 /* CardDesejo.swift */; };
 		42573E7A2D4D4AD000A34AF0 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42573E792D4D4AD000A34AF0 /* TabBar.swift */; };
 		42573E7C2D4D4E2800A34AF0 /* SheetDesejo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42573E7B2D4D4E2800A34AF0 /* SheetDesejo.swift */; };
 		42573E7E2D4D6C5F00A34AF0 /* TelaDesejosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42573E7D2D4D6C5F00A34AF0 /* TelaDesejosView.swift */; };
 		42573E802D4D71C600A34AF0 /* TelaDesejosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42573E7F2D4D71C600A34AF0 /* TelaDesejosViewModel.swift */; };
+		AB5BFE242D4D646B006D4EED /* BotaoCategoria.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5BFE232D4D646B006D4EED /* BotaoCategoria.swift */; };
 		AB81ABD12D4BEEB50021D7E6 /* ViaMemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB81ABD02D4BEEB50021D7E6 /* ViaMemoApp.swift */; };
 		AB81ABD32D4BEEB50021D7E6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB81ABD22D4BEEB50021D7E6 /* ContentView.swift */; };
 		AB81ABD52D4BEEB60021D7E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB81ABD42D4BEEB60021D7E6 /* Assets.xcassets */; };
@@ -26,12 +26,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		AB5BFE232D4D646B006D4EED /* BotaoCategoria.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BotaoCategoria.swift; sourceTree = "<group>"; };
 		42573E772D4D3F0500A34AF0 /* CardDesejo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDesejo.swift; sourceTree = "<group>"; };
 		42573E792D4D4AD000A34AF0 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		42573E7B2D4D4E2800A34AF0 /* SheetDesejo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetDesejo.swift; sourceTree = "<group>"; };
 		42573E7D2D4D6C5F00A34AF0 /* TelaDesejosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaDesejosView.swift; sourceTree = "<group>"; };
 		42573E7F2D4D71C600A34AF0 /* TelaDesejosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaDesejosViewModel.swift; sourceTree = "<group>"; };
+		AB5BFE232D4D646B006D4EED /* BotaoCategoria.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BotaoCategoria.swift; sourceTree = "<group>"; };
 		AB81ABCD2D4BEEB50021D7E6 /* ViaMemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViaMemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB81ABD02D4BEEB50021D7E6 /* ViaMemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViaMemoApp.swift; sourceTree = "<group>"; };
 		AB81ABD22D4BEEB50021D7E6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -56,6 +56,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		42A56E7B2D515C2200C9F117 /* TelaDesejos */ = {
+			isa = PBXGroup;
+			children = (
+				42573E7D2D4D6C5F00A34AF0 /* TelaDesejosView.swift */,
+				42573E7F2D4D71C600A34AF0 /* TelaDesejosViewModel.swift */,
+			);
+			path = TelaDesejos;
+			sourceTree = "<group>";
+		};
 		AB81ABC42D4BEEB50021D7E6 = {
 			isa = PBXGroup;
 			children = (
@@ -135,9 +144,8 @@
 		AB81ABE72D4C17010021D7E6 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				42573E7D2D4D6C5F00A34AF0 /* TelaDesejosView.swift */,
+				42A56E7B2D515C2200C9F117 /* TelaDesejos */,
 				AB81ABF22D4C1F900021D7E6 /* TelaInicial.swift */,
-				42573E7F2D4D71C600A34AF0 /* TelaDesejosViewModel.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";

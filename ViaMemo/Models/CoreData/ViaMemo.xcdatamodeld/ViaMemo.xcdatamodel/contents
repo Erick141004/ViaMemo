@@ -6,7 +6,7 @@
         <relationship name="categoriaPostagem" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Postagem" inverseName="postagemCategoria" inverseEntity="Postagem"/>
     </entity>
     <entity name="ListaDesejos" representedClassName="ListaDesejos" syncable="YES" codeGenerationType="class">
-        <attribute name="cidade" optional="YES" attributeType="String"/>
+        <attribute name="local" optional="YES" attributeType="String"/>
         <attribute name="titulo" optional="YES" attributeType="String"/>
         <relationship name="desejoCategoria" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Categoria" inverseName="categoriaDesejo" inverseEntity="Categoria"/>
     </entity>
