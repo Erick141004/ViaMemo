@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BotaoCategoriaViewModel {
     var nomeCategoria: [String] =
-        ["Montanha ⛰️", "Praia 🏖️", "Natureza 🍃", "Campo 🏕️", "Outros ✈️"]
+        ["Favoritos ❤️", "Montanha ⛰️", "Praia 🏖️", "Natureza 🍃", "Campo 🏕️", "Outros ✈️"]
     
     mutating func filtrarCategoria(categoria: String){
          let categoriaSeparada = categoria.split(separator: " ")
@@ -27,6 +27,7 @@ struct BotaoCategoria: View {
         VStack(alignment: .center){
             Text(categoria)
                 .font(.system(size: 20))
+                .foregroundStyle(.white)
         }
         .padding(.horizontal, 20)
         .padding(.vertical, 8)

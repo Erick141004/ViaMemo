@@ -44,8 +44,9 @@ class TelaPostagemViewModel: ObservableObject {
         novaPostagem.titulo = titulo
         novaPostagem.notas = notas
         novaPostagem.cidade = cidade
+        novaPostagem.bairro = bairro
         novaPostagem.data = data
-        novaPostagem.favorito = false // Iniciar como não favorito
+        novaPostagem.favorito = false
         
         if let imagemData = imagemSelecionada?.jpegData(compressionQuality: 0.8) {
             novaPostagem.imagem = imagemData

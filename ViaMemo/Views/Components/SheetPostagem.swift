@@ -53,7 +53,7 @@ struct SheetPostagem: View {
                 }
                 
                 if !viewModel.cidade.isEmpty {
-                    Text("Cidade: \(viewModel.cidade)")
+                    Text("Cidade: \(viewModel.cidade) - \(viewModel.bairro)")
                 }
                 
             }

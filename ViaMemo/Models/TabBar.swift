@@ -9,13 +9,22 @@ import SwiftUI
 
 struct TabBar: View {
     let contexto = PersistenceController.shared.container.viewContext
+    @ObservedObject private var viewModel = TelaPostagemViewModel()
+    
     var body: some View {
         TabView {
-            NavigationView{
+            NavigationStack {
                 TelaDesejosView(contexto: contexto)
             }
             .tabItem {
                 Label("Lista de Desejos", systemImage: "square.and.pencil")
+            }
+
+            NavigationStack {
+                TelaPostagem(viewModel: viewModel)
+            }
+            .tabItem {
+                Label("Memórias", systemImage: "cat.fill")
             }
         }
     }

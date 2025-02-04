@@ -11,8 +11,7 @@ struct ViaMemoApp: App {
     
     var body: some Scene {
         WindowGroup {
-            TelaPostagem(viewModel: viewModel)
-                .environmentObject(viewModel)
+            TabBar()
         }
     }
 }

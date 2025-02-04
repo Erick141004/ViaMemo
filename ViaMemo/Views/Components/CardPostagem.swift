@@ -12,57 +12,73 @@ struct CardPostagem: View {
     @ObservedObject var viewModel: TelaPostagemViewModel
     
     var body: some View {
-        VStack(alignment: .leading) {
-            // Botão de coração
-            HStack {
-                Spacer()
-                Button(action: {
-                    viewModel.toggleFavorito(postagem: postagem)
-                }) {
-                    Image(systemName: postagem.favorito ? "heart.fill" : "heart")
-                        .foregroundColor(postagem.favorito ? .red : .white)
-                        .padding(8)
-                }
-            }
-            
-            // Imagem da postagem
-            if let imageData = postagem.imagem, let uiImage = UIImage(data: imageData) {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(minWidth: 0, maxWidth: .infinity)
-                    .frame(height: 200)
-                    .clipped()
-                    .cornerRadius(12)
-            }
-            
-            // Detalhes da postagem
+        ZStack(alignment: .topTrailing) {
             VStack(alignment: .leading) {
-                Text(postagem.titulo ?? "Sem título")
-                    .lineLimit(1)
-                    .padding(.bottom, 1)
-                    .font(.headline)
-                    .foregroundStyle(.white)
-                    .bold()
-                
-                Text(postagem.data ?? "Sem data")
-                    .foregroundStyle(.white)
-                    .font(.caption)
-                    .lineLimit(2)
-                
-                HStack {
-                    Image(systemName: "mappin.and.ellipse")
-                    Text(postagem.cidade?.isEmpty ?? true ? "Localização desconhecida" : postagem.cidade ?? "Localização desconhecida")
+                if let imageData = postagem.imagem, let uiImage = UIImage(data: imageData) {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                        .frame(height: 250)
+                        .clipped()
+                        .cornerRadius(12)
                 }
-                .font(.caption2)
-                .foregroundColor(.iconeSelecionado)
+                
+                VStack(alignment: .leading) {
+                    Text(postagem.titulo ?? "Sem título")
+                        .lineLimit(1)
+                        .padding(.bottom, 1)
+                        .font(.headline)
+                        .foregroundStyle(.white)
+                        .bold()
+                    
+                    Text(postagem.data ?? "Sem data")
+                        .foregroundStyle(.white)
+                        .font(.caption)
+                        .lineLimit(2)
+                    
+                    // Exibição da localização (Cidade - Bairro)
+                    HStack {
+                        Image(systemName: "mappin.and.ellipse")
+                        Text(formatarLocalizacao(cidade: postagem.cidade, bairro: postagem.bairro))
+                    }
+                    .font(.caption2)
+                    .foregroundColor(.iconeSelecionado)
+                }
+                .padding(.horizontal, 10)
+                .padding(.bottom, 10)
+                .padding(.top, -5)
             }
-            .padding(.horizontal, 10)
-            .padding(.bottom, 10)
-            .padding(.top, -5)
+            .background(Color.verdePrincipal)
+            .cornerRadius(12)
+            .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
+
+            Button(action: {
+                viewModel.toggleFavorito(postagem: postagem)
+            }) {
+                Image(systemName: postagem.favorito ? "heart.fill" : "heart")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 30, height: 30)
+                    .foregroundColor(postagem.favorito ? .verdePrincipal : .white)
+                    .padding(10)
+            }
         }
-        .background(Color.verdePrincipal)
-        .cornerRadius(12)
-        .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
+    }
+    
+    // Função para formatar a exibição da cidade e bairro
+    private func formatarLocalizacao(cidade: String?, bairro: String?) -> String {
+        let cidadeFormatada = cidade?.isEmpty ?? true ? nil : cidade
+        let bairroFormatado = bairro?.isEmpty ?? true ? nil : bairro
+        
+        if let cidade = cidadeFormatada, let bairro = bairroFormatado {
+            return "\(cidade) - \(bairro)"
+        } else if let cidade = cidadeFormatada {
+            return cidade
+        } else if let bairro = bairroFormatado {
+            return bairro
+        } else {
+            return "Localização desconhecida"
+        }
     }
 }
