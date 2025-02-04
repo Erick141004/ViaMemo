@@ -11,11 +11,13 @@
         <relationship name="desejoCategoria" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Categoria" inverseName="categoriaDesejo" inverseEntity="Categoria"/>
     </entity>
     <entity name="Postagem" representedClassName="Postagem" syncable="YES" codeGenerationType="class">
+        <attribute name="bairro" optional="YES" attributeType="String"/>
         <attribute name="cidade" optional="YES" attributeType="String"/>
         <attribute name="data" optional="YES" attributeType="String"/>
         <attribute name="favorito" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="imagem" optional="YES" attributeType="Binary"/>
+        <attribute name="notas" optional="YES" attributeType="String"/>
         <attribute name="titulo" optional="YES" attributeType="String"/>
         <relationship name="postagemCategoria" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Categoria" inverseName="categoriaPostagem" inverseEntity="Categoria"/>
     </entity>
