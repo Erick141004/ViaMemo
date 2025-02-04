@@ -18,7 +18,6 @@ struct TelaPostagem: View {
             // Barra de Pesquisa
             SearchBar(textoPesquisa: $viewModel.textoProcura, buscarItens: viewModel.fetchPostagens)
             
-            // Filtros de Categoria
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
                     ForEach(categoriaViewModel.nomeCategoria, id: \.self) { categoria in
@@ -29,7 +28,6 @@ struct TelaPostagem: View {
                     }
                 }
                 .padding(.horizontal)
-                .padding(.vertical, 10)
             }
             
             if (viewModel.postagens.isEmpty){
@@ -64,6 +62,7 @@ struct TelaPostagem: View {
         }
         .background(Color.fundo)
         .navigationTitle("ViaMemo")
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Text("ViaMemo")

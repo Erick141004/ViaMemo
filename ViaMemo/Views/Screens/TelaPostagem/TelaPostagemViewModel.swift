@@ -141,7 +141,6 @@ class TelaPostagemViewModel: ObservableObject {
     }
     
     
-    
     func toggleFavorito(postagem: Postagem) {
         postagem.favorito.toggle()
         salvarContexto()

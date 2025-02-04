@@ -37,13 +37,13 @@ struct CardPostagem: View {
                         .font(.caption)
                         .lineLimit(2)
                     
-                    // Exibição da localização (Cidade - Bairro)
                     HStack {
                         Image(systemName: "mappin.and.ellipse")
                         Text(formatarLocalizacao(cidade: postagem.cidade, bairro: postagem.bairro))
                     }
                     .font(.caption2)
                     .foregroundColor(.iconeSelecionado)
+                    .padding(.top, 1)
                 }
                 .padding(.horizontal, 10)
                 .padding(.bottom, 10)
@@ -66,7 +66,6 @@ struct CardPostagem: View {
         }
     }
     
-    // Função para formatar a exibição da cidade e bairro
     private func formatarLocalizacao(cidade: String?, bairro: String?) -> String {
         let cidadeFormatada = cidade?.isEmpty ?? true ? nil : cidade
         let bairroFormatado = bairro?.isEmpty ?? true ? nil : bairro
