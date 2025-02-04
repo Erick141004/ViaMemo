@@ -52,6 +52,16 @@ struct TelaPostagem: View {
         .background(Color.fundo)
         .navigationTitle("ViaMemo")
         .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Text("ViaMemo")
+                    .foregroundColor(.clear)
+                    .overlay {
+                        Image("Logo")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 40)
+                    }
+            }
             ToolbarItem(placement: .topBarTrailing) {
                 Button(action: { mostrarSheet = true }) {
                     Image(systemName: "plus")

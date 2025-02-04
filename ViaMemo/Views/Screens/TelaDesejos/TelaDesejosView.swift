@@ -9,15 +9,10 @@ import SwiftUI
 import CoreData
 
 struct TelaDesejosView: View {
-    @StateObject private var viewModel: TelaDesejosViewModel
-    @Environment(\.managedObjectContext) private var contexto
+    @ObservedObject var viewModel: TelaDesejosViewModel
     @State var mostrarSheet = false
     @State var categoriaViewModel = BotaoCategoriaViewModel()
     @State private var procurar: String = ""
-    
-    init(contexto: NSManagedObjectContext) {
-        _viewModel = StateObject(wrappedValue: TelaDesejosViewModel(contexto: contexto))
-    }
     
     var body: some View {
         VStack{
@@ -32,7 +27,8 @@ struct TelaDesejosView: View {
                             }
                     }
                 }
-                .padding()
+                .padding(.horizontal)
+                .padding(.vertical, 10)
             }
             
             List {
@@ -51,13 +47,28 @@ struct TelaDesejosView: View {
         .containerRelativeFrame([.horizontal, .vertical])
         .background(.fundo)
         .toolbar {
-            Button(action: {
-                mostrarSheet = true
-            }) {
-                Label("", systemImage: "plus")
-                    .font(.title)
-            }.sheet(isPresented: $mostrarSheet) {
-                SheetDesejo(viewModel: viewModel)
+            ToolbarItem(placement: .topBarLeading) {
+                Text("ViaMemo")
+                    .foregroundColor(.clear)
+                    .overlay {
+                        Image("Logo")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 40)
+                    }
+            }
+            
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    mostrarSheet = true
+                }) {
+                    Label("", systemImage: "plus")
+                        .font(.title)
+                        .bold()
+                }
+                .sheet(isPresented: $mostrarSheet) {
+                    SheetDesejo(viewModel: viewModel)
+                }
             }
         }
         .navigationTitle("Lista de Desejos")

@@ -9,24 +9,30 @@ import SwiftUI
 
 struct CardDesejo: View {
     var desejo: ListaDesejos
+    
     var body: some View {
-        VStack (alignment: .leading){
-            HStack(spacing: 20){
-                Image(uiImage: .pin)
-                VStack(alignment: .leading){
-                    Text(desejo.titulo ?? "Sem título")
-                        .foregroundStyle(.white)
-                        .fontWeight(.bold)
-                        .lineLimit(2)
-                    Text(desejo.local ?? "Local Desconhecido")
-                        .foregroundColor(.white)
+        GeometryReader { responsivo in
+            VStack(alignment: .leading) {
+                HStack(spacing: 20) {
+                    Image(uiImage: .pin)
+                    
+                    VStack(alignment: .leading) {
+                        Text(desejo.titulo ?? "Sem título")
+                            .foregroundStyle(.white)
+                            .fontWeight(.bold)
+                            .lineLimit(2)
+                        
+                        Text(desejo.local ?? "Local Desconhecido")
+                            .foregroundColor(.white)
+                    }
                 }
-                .frame(width: 170, alignment: .leading)
+                .padding()
+                .frame(width: responsivo.size.width * 1, alignment: .leading)
+                .background(.verdePrincipal)
+                .clipShape(RoundedRectangle(cornerRadius: 15))
             }
+            .frame(width: responsivo.size.width, alignment: .center)
         }
-        .padding(.trailing, 50)
-        .padding()
-        .background(.verdePrincipal)
-        .clipShape(RoundedRectangle(cornerRadius: 15))
+        .frame(height: 100)
     }
 }

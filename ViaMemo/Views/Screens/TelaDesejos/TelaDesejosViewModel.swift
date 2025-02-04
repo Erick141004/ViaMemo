@@ -13,9 +13,11 @@ class TelaDesejosViewModel: ObservableObject {
     @Published var titulo: String = ""
     @Published var local: String = ""
     private let contexto: NSManagedObjectContext
+    private let container: NSPersistentContainer
     
-    init(contexto: NSManagedObjectContext) {
-        self.contexto = contexto
+    init() {
+        self.container = PersistenceController.shared.container
+        self.contexto = container.viewContext
         fetchDesejos()
     }
     

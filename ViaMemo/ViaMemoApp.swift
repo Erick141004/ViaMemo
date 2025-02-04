@@ -7,7 +7,8 @@ import SwiftUI
 
 @main
 struct ViaMemoApp: App {
-    @StateObject private var viewModel = TelaPostagemViewModel()
+    @StateObject private var postagemViewModel = TelaPostagemViewModel()
+    @StateObject private var desejoViewModel = TelaDesejosViewModel()
     
     var body: some Scene {
         WindowGroup {
