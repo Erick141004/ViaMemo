@@ -15,10 +15,9 @@ struct TelaPostagem: View {
     
     var body: some View {
         VStack {
-            // Barra de Pesquisa
             SearchBar(textoPesquisa: $procurar)
+                .padding(.top, 15)
             
-            // Filtros de Categoria
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
                     ForEach(categoriaViewModel.nomeCategoria, id: \.self) { categoria in
@@ -29,17 +28,15 @@ struct TelaPostagem: View {
                     }
                 }
                 .padding(.horizontal)
-                .padding(.vertical, 10)
             }
             
-            // Lista de Postagens
             ScrollView {
                 LazyVGrid(
                     columns: [
-                        GridItem(.flexible(), spacing: 16), // Aumenta o espaçamento entre as colunas
+                        GridItem(.flexible(), spacing: 16),
                         GridItem(.flexible(), spacing: 16)
                     ],
-                    spacing: 16 // Espaçamento entre as linhas
+                    spacing: 16
                 ) {
                     ForEach(viewModel.postagens, id: \.id) { postagem in
                         CardPostagem(postagem: postagem, viewModel: viewModel)
@@ -51,6 +48,7 @@ struct TelaPostagem: View {
         }
         .background(Color.fundo)
         .navigationTitle("ViaMemo")
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Text("ViaMemo")

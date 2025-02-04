@@ -26,8 +26,8 @@ struct BotaoCategoria: View {
     var body: some View {
         VStack(alignment: .center){
             Text(categoria)
-                .font(.system(size: 20))
-                .foregroundStyle(.white)
+                .font(.subheadline)
+                .foregroundStyle(.iconeSelecionado)
         }
         .padding(.horizontal, 20)
         .padding(.vertical, 8)

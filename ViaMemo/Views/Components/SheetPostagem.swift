@@ -15,7 +15,7 @@ struct SheetPostagem: View {
     private var podeSalvar: Bool {
         return viewModel.imagemSelecionada != nil && !viewModel.titulo.isEmpty
     }
-
+    
     var body: some View {
         NavigationView {
             Form {
@@ -86,5 +86,5 @@ struct SheetPostagem: View {
         viewModel.cidade = ""
         viewModel.data = ""
     }
-
+    
 }
