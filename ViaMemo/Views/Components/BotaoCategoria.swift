@@ -12,10 +12,11 @@ struct BotaoCategoriaViewModel {
         ["Montanha ⛰️", "Praia 🏖️", "Natureza 🍃", "Campo 🏕️", "Outros ✈️"]
     
     mutating func filtrarCategoria(categoria: String){
-        var categoriaSeparada = categoria.split(separator: " ")
-        var categoriaTratada = categoriaSeparada[0]
-        
-        
+         let categoriaSeparada = categoria.split(separator: " ")
+         let categoriaTratada = categoriaSeparada[0]
+         
+         //TODO: Logica de filtrar categorias
+         print("Tem que fazer a logica de selecionar as categorias \(categoriaTratada)")
     }
 }
 

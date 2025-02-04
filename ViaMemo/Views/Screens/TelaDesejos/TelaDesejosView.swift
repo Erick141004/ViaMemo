@@ -12,24 +12,42 @@ struct TelaDesejosView: View {
     @StateObject private var viewModel: TelaDesejosViewModel
     @Environment(\.managedObjectContext) private var contexto
     @State var mostrarSheet = false
+    @State var categoriaViewModel = BotaoCategoriaViewModel()
+    @State private var procurar: String = ""
     
     init(contexto: NSManagedObjectContext) {
         _viewModel = StateObject(wrappedValue: TelaDesejosViewModel(contexto: contexto))
     }
     
     var body: some View {
-        List {
-            ForEach(viewModel.desejos, id: \.self) { desejo in
-                CardDesejo(desejo: desejo)
-                    .listRowBackground(Color.clear)
-                    .scrollContentBackground(.hidden)
-                    .listRowSeparator(.hidden)
+        VStack{
+            SearchBar(textoPesquisa: $procurar)
+            
+            ScrollView(.horizontal, showsIndicators: false){
+                HStack{
+                    ForEach(categoriaViewModel.nomeCategoria, id: \.self){ categoria in
+                        BotaoCategoria(categoria: categoria)
+                            .onTapGesture {
+                                categoriaViewModel.filtrarCategoria(categoria: categoria)
+                            }
+                    }
+                }
+                .padding()
             }
-            .onDelete { offsets in
-                viewModel.deletarDesejo(at: offsets)
+            
+            List {
+                ForEach(viewModel.desejos, id: \.self) { desejo in
+                    CardDesejo(desejo: desejo)
+                        .listRowBackground(Color.clear)
+                        .scrollContentBackground(.hidden)
+                        .listRowSeparator(.hidden)
+                }
+                .onDelete { offsets in
+                    viewModel.deletarDesejo(at: offsets)
+                }
             }
+            .listStyle(PlainListStyle())
         }
-        .listStyle(PlainListStyle())
         .containerRelativeFrame([.horizontal, .vertical])
         .background(.fundo)
         .toolbar {

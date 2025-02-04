@@ -1,0 +1,54 @@
+//
+//  SearchBar.swift
+//  ViaMemo
+//
+//  Created by ERICK COSTA REIMBERG DE LIMA on 03/02/25.
+//
+
+import SwiftUI
+
+struct SearchBarViewModel{
+    var textoPesquisa: String
+    
+    mutating func pesquisarTexto(){
+        
+    }
+}
+
+struct SearchBar: View {
+    @Binding var textoPesquisa: String
+    
+    var body: some View {
+        HStack{
+            Image(systemName: "magnifyingglass")
+                .foregroundColor(.iconeSelecionado)
+            
+            TextField("Pesquisar", text: $textoPesquisa)
+                .padding(5)
+                .background(.verdeBotao)
+                .foregroundColor(.white)
+                .tint(.iconeSelecionado)
+                .onChange(of: textoPesquisa){
+                    
+                }
+            
+            if !textoPesquisa.isEmpty {
+                    Button(action: {
+                        textoPesquisa = ""
+                    }) {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundColor(.iconeSelecionado)
+                    }
+                }
+        }
+        .padding(.horizontal, 15)
+        .padding(.vertical, 3)
+        .background(RoundedRectangle(cornerRadius: 10).fill(.verdeBotao))
+        .frame(height: 50)
+        .padding(.horizontal, 15)
+    }
+}
+
+#Preview {
+    SearchBar(textoPesquisa: .constant("Testeeee"))
+}
