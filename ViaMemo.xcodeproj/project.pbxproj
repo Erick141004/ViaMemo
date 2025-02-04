@@ -12,6 +12,10 @@
 		42573E7C2D4D4E2800A34AF0 /* SheetDesejo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42573E7B2D4D4E2800A34AF0 /* SheetDesejo.swift */; };
 		42573E7E2D4D6C5F00A34AF0 /* TelaDesejosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42573E7D2D4D6C5F00A34AF0 /* TelaDesejosView.swift */; };
 		42573E802D4D71C600A34AF0 /* TelaDesejosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42573E7F2D4D71C600A34AF0 /* TelaDesejosViewModel.swift */; };
+		7F6D7F752D52834D00C34A6B /* SheetPostagem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6D7F742D52834D00C34A6B /* SheetPostagem.swift */; };
+		7F6D7F772D52836800C34A6B /* CardPostagem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6D7F762D52836800C34A6B /* CardPostagem.swift */; };
+		7F6D7F792D5283A000C34A6B /* TelaPostagem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6D7F782D5283A000C34A6B /* TelaPostagem.swift */; };
+		7FE875D82D5282A100917F43 /* TelaPostagemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE875D72D5282A100917F43 /* TelaPostagemViewModel.swift */; };
 		AB5BFE242D4D646B006D4EED /* BotaoCategoria.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5BFE232D4D646B006D4EED /* BotaoCategoria.swift */; };
 		AB65006D2D52831200F38C34 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB65006C2D52831200F38C34 /* SearchBar.swift */; };
 		AB81ABD12D4BEEB50021D7E6 /* ViaMemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB81ABD02D4BEEB50021D7E6 /* ViaMemoApp.swift */; };
@@ -32,6 +36,10 @@
 		42573E7B2D4D4E2800A34AF0 /* SheetDesejo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetDesejo.swift; sourceTree = "<group>"; };
 		42573E7D2D4D6C5F00A34AF0 /* TelaDesejosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaDesejosView.swift; sourceTree = "<group>"; };
 		42573E7F2D4D71C600A34AF0 /* TelaDesejosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaDesejosViewModel.swift; sourceTree = "<group>"; };
+		7F6D7F742D52834D00C34A6B /* SheetPostagem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetPostagem.swift; sourceTree = "<group>"; };
+		7F6D7F762D52836800C34A6B /* CardPostagem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPostagem.swift; sourceTree = "<group>"; };
+		7F6D7F782D5283A000C34A6B /* TelaPostagem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaPostagem.swift; sourceTree = "<group>"; };
+		7FE875D72D5282A100917F43 /* TelaPostagemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaPostagemViewModel.swift; sourceTree = "<group>"; };
 		AB5BFE232D4D646B006D4EED /* BotaoCategoria.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BotaoCategoria.swift; sourceTree = "<group>"; };
 		AB65006C2D52831200F38C34 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		AB81ABCD2D4BEEB50021D7E6 /* ViaMemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViaMemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,6 +73,15 @@
 				42573E7F2D4D71C600A34AF0 /* TelaDesejosViewModel.swift */,
 			);
 			path = TelaDesejos;
+			sourceTree = "<group>";
+		};
+		7FE875D62D52827A00917F43 /* TelaPostagem */ = {
+			isa = PBXGroup;
+			children = (
+				7FE875D72D5282A100917F43 /* TelaPostagemViewModel.swift */,
+				7F6D7F782D5283A000C34A6B /* TelaPostagem.swift */,
+			);
+			path = TelaPostagem;
 			sourceTree = "<group>";
 		};
 		AB81ABC42D4BEEB50021D7E6 = {
@@ -140,6 +157,8 @@
 				AB5BFE232D4D646B006D4EED /* BotaoCategoria.swift */,
 				42573E772D4D3F0500A34AF0 /* CardDesejo.swift */,
 				AB65006C2D52831200F38C34 /* SearchBar.swift */,
+				7F6D7F742D52834D00C34A6B /* SheetPostagem.swift */,
+				7F6D7F762D52836800C34A6B /* CardPostagem.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -147,6 +166,7 @@
 		AB81ABE72D4C17010021D7E6 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				7FE875D62D52827A00917F43 /* TelaPostagem */,
 				42A56E7B2D515C2200C9F117 /* TelaDesejos */,
 				AB81ABF22D4C1F900021D7E6 /* TelaInicial.swift */,
 			);
@@ -246,6 +266,8 @@
 				AB81ABF12D4C1F730021D7E6 /* TesteView.swift in Sources */,
 				42573E7C2D4D4E2800A34AF0 /* SheetDesejo.swift in Sources */,
 				AB81ABF32D4C1F900021D7E6 /* TelaInicial.swift in Sources */,
+				7FE875D82D5282A100917F43 /* TelaPostagemViewModel.swift in Sources */,
+				7F6D7F752D52834D00C34A6B /* SheetPostagem.swift in Sources */,
 				42573E802D4D71C600A34AF0 /* TelaDesejosViewModel.swift in Sources */,
 				AB81ABDD2D4BEEB60021D7E6 /* ViaMemo.xcdatamodeld in Sources */,
 				42573E7E2D4D6C5F00A34AF0 /* TelaDesejosView.swift in Sources */,
@@ -253,8 +275,10 @@
 				AB65006D2D52831200F38C34 /* SearchBar.swift in Sources */,
 				AB81ABEB2D4C1F3E0021D7E6 /* SwiftData.swift in Sources */,
 				42573E782D4D3F0500A34AF0 /* CardDesejo.swift in Sources */,
+				7F6D7F772D52836800C34A6B /* CardPostagem.swift in Sources */,
 				AB81ABEF2D4C1F6A0021D7E6 /* CardInicial.swift in Sources */,
 				42573E7A2D4D4AD000A34AF0 /* TabBar.swift in Sources */,
+				7F6D7F792D5283A000C34A6B /* TelaPostagem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
