@@ -16,7 +16,7 @@ struct TelaDesejosView: View {
     
     var body: some View {
         VStack{
-            SearchBar(textoPesquisa: $procurar)
+            SearchBar(textoPesquisa: $viewModel.textoProcura, buscarItens: viewModel.fetchDesejos)
             
             ScrollView(.horizontal, showsIndicators: false){
                 HStack{
@@ -31,18 +31,31 @@ struct TelaDesejosView: View {
                 .padding(.vertical, 10)
             }
             
-            List {
-                ForEach(viewModel.desejos, id: \.self) { desejo in
-                    CardDesejo(desejo: desejo)
-                        .listRowBackground(Color.clear)
-                        .scrollContentBackground(.hidden)
-                        .listRowSeparator(.hidden)
-                }
-                .onDelete { offsets in
-                    viewModel.deletarDesejo(at: offsets)
+            if (viewModel.desejos.isEmpty){
+                if (viewModel.buscaAtiva){
+                    ContentUnavailableView.search(text: viewModel.textoProcura)
+                } else{
+                    ContentUnavailableView(
+                        "Nenhuma postagem",
+                        systemImage: "photo.on.rectangle",
+                        description: Text("Comece criando sua primeira postagem!")
+                    )
                 }
             }
-            .listStyle(PlainListStyle())
+            else {
+                List {
+                    ForEach(viewModel.desejos, id: \.self) { desejo in
+                        CardDesejo(desejo: desejo)
+                            .listRowBackground(Color.clear)
+                            .scrollContentBackground(.hidden)
+                            .listRowSeparator(.hidden)
+                    }
+                    .onDelete { offsets in
+                        viewModel.deletarDesejo(at: offsets)
+                    }
+                }
+                .listStyle(PlainListStyle())
+            }
         }
         .containerRelativeFrame([.horizontal, .vertical])
         .background(.fundo)

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct SearchBarViewModel{
     var textoPesquisa: String
@@ -17,6 +18,7 @@ struct SearchBarViewModel{
 
 struct SearchBar: View {
     @Binding var textoPesquisa: String
+    var buscarItens: () -> Void = {}
     
     var body: some View {
         HStack{
@@ -29,7 +31,7 @@ struct SearchBar: View {
                 .foregroundColor(.white)
                 .tint(.iconeSelecionado)
                 .onChange(of: textoPesquisa){
-                    
+                    buscarItens()
                 }
             
             if !textoPesquisa.isEmpty {
@@ -51,4 +53,10 @@ struct SearchBar: View {
 
 #Preview {
     SearchBar(textoPesquisa: .constant("Testeeee"))
+}
+
+protocol Searchable {
+    associatedtype Entity: NSManagedObject
+    var searchText: String { get set }
+    func fetchResults()
 }

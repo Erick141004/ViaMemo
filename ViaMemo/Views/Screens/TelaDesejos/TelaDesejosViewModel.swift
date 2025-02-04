@@ -15,6 +15,9 @@ class TelaDesejosViewModel: ObservableObject {
     private let contexto: NSManagedObjectContext
     private let container: NSPersistentContainer
     
+    @Published var textoProcura: String = ""
+    @Published var buscaAtiva: Bool = false
+    
     init() {
         self.container = PersistenceController.shared.container
         self.contexto = container.viewContext
@@ -24,8 +27,19 @@ class TelaDesejosViewModel: ObservableObject {
     func fetchDesejos() {
         let request: NSFetchRequest<ListaDesejos> = ListaDesejos.fetchRequest()
         
+        if !textoProcura.isEmpty {
+            request.predicate = NSPredicate(
+                format: "titulo CONTAINS[cd] %@ OR local CONTAINS[cd] %@",
+                textoProcura, textoProcura, textoProcura
+            )
+            buscaAtiva = true
+        } else {
+            request.predicate = nil
+            buscaAtiva = false
+        }
+        
         do {
-            self.desejos = try contexto.fetch(request)
+            desejos = try contexto.fetch(request)
         } catch {
             print("Erro ao buscar o desejo: \(error)")
         }

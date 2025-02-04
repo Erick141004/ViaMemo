@@ -16,7 +16,7 @@ struct TelaPostagem: View {
     var body: some View {
         VStack {
             // Barra de Pesquisa
-            SearchBar(textoPesquisa: $procurar)
+            SearchBar(textoPesquisa: $viewModel.textoProcura, buscarItens: viewModel.fetchPostagens)
             
             // Filtros de Categoria
             ScrollView(.horizontal, showsIndicators: false) {
@@ -32,21 +32,34 @@ struct TelaPostagem: View {
                 .padding(.vertical, 10)
             }
             
-            // Lista de Postagens
-            ScrollView {
-                LazyVGrid(
-                    columns: [
-                        GridItem(.flexible(), spacing: 16), // Aumenta o espaçamento entre as colunas
-                        GridItem(.flexible(), spacing: 16)
-                    ],
-                    spacing: 16 // Espaçamento entre as linhas
-                ) {
-                    ForEach(viewModel.postagens, id: \.id) { postagem in
-                        CardPostagem(postagem: postagem, viewModel: viewModel)
-                    }
+            if (viewModel.postagens.isEmpty){
+                if (viewModel.buscaAtiva){
+                    ContentUnavailableView.search(text: viewModel.textoProcura)
+                } else{
+                    ContentUnavailableView(
+                        "Nenhuma postagem",
+                        systemImage: "photo.on.rectangle",
+                        description: Text("Comece criando sua primeira postagem!")
+                    )
                 }
-                .padding(.horizontal)
-                .padding(.bottom, 20)
+            }
+            else {
+                // Lista de Postagens
+                ScrollView {
+                    LazyVGrid(
+                        columns: [
+                            GridItem(.flexible(), spacing: 16), // Aumenta o espaçamento entre as colunas
+                            GridItem(.flexible(), spacing: 16)
+                        ],
+                        spacing: 16 // Espaçamento entre as linhas
+                    ) {
+                        ForEach(viewModel.postagens, id: \.id) { postagem in
+                            CardPostagem(postagem: postagem, viewModel: viewModel)
+                        }
+                    }
+                    .padding(.horizontal)
+                    .padding(.bottom, 20)
+                }
             }
         }
         .background(Color.fundo)

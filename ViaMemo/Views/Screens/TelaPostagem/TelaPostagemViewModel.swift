@@ -20,6 +20,9 @@ class TelaPostagemViewModel: ObservableObject {
     @Published var data: String = ""
     @Published var bairro: String = ""
     
+    @Published var textoProcura: String = ""
+    @Published var buscaAtiva: Bool = false
+    
     private let container: NSPersistentContainer
     private let context: NSManagedObjectContext
     
@@ -31,6 +34,20 @@ class TelaPostagemViewModel: ObservableObject {
     
     func fetchPostagens() {
         let request: NSFetchRequest<Postagem> = Postagem.fetchRequest()
+        
+        print("Entrou aqui para fazer a busca")
+        
+        if !textoProcura.isEmpty {
+            request.predicate = NSPredicate(
+                format: "titulo CONTAINS[cd] %@ OR bairro CONTAINS[cd] %@ OR cidade CONTAINS[cd] %@",
+                textoProcura, textoProcura, textoProcura
+            )
+            buscaAtiva = true
+        } else {
+            request.predicate = nil
+            buscaAtiva = false
+        }
+        
         do {
             postagens = try context.fetch(request)
         } catch {
