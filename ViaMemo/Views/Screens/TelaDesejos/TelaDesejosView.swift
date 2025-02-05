@@ -28,7 +28,6 @@ struct TelaDesejosView: View {
                     }
                 }
                 .padding(.horizontal)
-                .padding(.vertical, 10)
             }
             
             if (viewModel.desejos.isEmpty){
@@ -85,6 +84,7 @@ struct TelaDesejosView: View {
             }
         }
         .navigationTitle("Lista de Desejos")
+        .navigationBarTitleDisplayMode(.inline)
         
     }
     

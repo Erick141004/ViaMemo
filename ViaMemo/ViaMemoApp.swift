@@ -12,7 +12,7 @@ struct ViaMemoApp: App {
     
     var body: some Scene {
         WindowGroup {
-            TabBar()
+            ContentView()
         }
     }
 }

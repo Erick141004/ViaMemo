@@ -61,7 +61,7 @@ struct TelaPostagem: View {
             }
         }
         .background(Color.fundo)
-        .navigationTitle("ViaMemo")
+        .navigationTitle("Memórias")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {

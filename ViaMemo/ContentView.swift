@@ -9,8 +9,16 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
+    @State private var primeiraVez: Bool = UserDefaults.standard.bool(forKey: "hasLaunchedBefore") == false
+
     var body: some View {
-        TabBar()
+        Group {
+            if primeiraVez {
+                TelaInicial(primeiraVez: $primeiraVez)
+            } else {
+                TabBar()
+            }
+        }
     }
 }
 

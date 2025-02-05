@@ -11,22 +11,28 @@ struct TabBar: View {
     @ObservedObject private var postagemViewModel = TelaPostagemViewModel()
     @ObservedObject private var desejoViewModel = TelaDesejosViewModel()
     
+    @State var tabSelecionado = 1
+    
     var body: some View {
-        TabView {
-            NavigationStack {
-                TelaDesejosView(viewModel: desejoViewModel)
-            }
-            .tabItem {
-                Label("Lista de Desejos", systemImage: "square.and.pencil")
-            }
-
+        TabView(selection: $tabSelecionado,
+                content:  {
             NavigationStack {
                 TelaPostagem(viewModel: postagemViewModel)
             }
             .tabItem {
-                Label("Memórias", systemImage: "cat.fill")
+                Text("Memórias")
+                Image(tabSelecionado == 1 ? "memoriaSelecionado" : "memoria")
+            }.tag(1)
+            
+            NavigationStack {
+                TelaDesejosView(viewModel: desejoViewModel)
             }
-        }
+            .tabItem {
+                Text("Desejos")
+                Image(tabSelecionado == 2 ? "desejoSelecionado" : "desejo")
+            }.tag(2)
+            
+        })
     }
 }
 

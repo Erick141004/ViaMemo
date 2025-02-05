@@ -8,23 +8,23 @@
 import SwiftUI
 
 struct TelaInicial: View {
+    @Binding var primeiraVez: Bool
+
     var body: some View {
-        VStack(){
+        VStack {
             Spacer()
-            ZStack{
+            ZStack {
                 LogoInicial()
-                InfosIniciais()
+                InfosIniciais(primeiraVez: $primeiraVez)
             }
             .offset(y: 25)
         }
         .background(
             Image("ImagemPrincipal")
-            .resizable()
-            .ignoresSafeArea()
+                .resizable()
+                .ignoresSafeArea()
         )
         .ignoresSafeArea()
-        
-
     }
 }
 
@@ -35,30 +35,34 @@ struct LogoInicial: View {
             .frame(maxWidth: 120, maxHeight: 120)
             .offset(y: -180)
             .zIndex(1)
-        
+
         Image("Logo")
             .resizable()
-            .frame(maxWidth: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, maxHeight: 100)
+            .frame(maxWidth: 100, maxHeight: 100)
             .offset(y: -177)
             .zIndex(1.5)
     }
 }
 
 struct InfosIniciais: View {
+    @Binding var primeiraVez: Bool
+
     var body: some View {
-        VStack(alignment: .center, spacing: 30){
+        VStack(alignment: .center, spacing: 30) {
             Text("ViaMemo")
                 .font(.system(size: 35))
                 .padding(.top, 28)
-            
+
             Text("Todas as suas viagens em um só lugar")
                 .font(.system(size: 26, design: .serif))
                 .multilineTextAlignment(.center)
-                
-            Button{
-                
+
+            Button {
+                // Marca que o app já foi aberto
+                UserDefaults.standard.set(true, forKey: "hasLaunchedBefore")
+                primeiraVez = false
             } label: {
-                VStack(){
+                VStack {
                     Text("Começar")
                         .font(.system(size: 20))
                         .foregroundStyle(Color.white)
@@ -67,6 +71,7 @@ struct InfosIniciais: View {
                 .background(Color("verdeBotao"))
                 .clipShape(RoundedRectangle(cornerRadius: 50))
             }
+
             Text("Ao continuar, você aceita nossos Termos de Uso e Política de Privacidade.")
                 .font(.system(size: 15))
                 .multilineTextAlignment(.center)
@@ -79,5 +84,5 @@ struct InfosIniciais: View {
 }
 
 #Preview {
-    TelaInicial()
+    TelaInicial(primeiraVez: .constant(true))
 }
