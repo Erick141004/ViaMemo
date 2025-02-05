@@ -30,7 +30,7 @@ struct CardPostagem: View {
                         .padding(.bottom, 1)
                         .font(.headline)
                         .foregroundStyle(.white)
-                        .bold()
+                        .bold() 
                     
                     Text(postagem.data ?? "Sem data")
                         .foregroundStyle(.white)
@@ -39,7 +39,8 @@ struct CardPostagem: View {
                     
                     HStack {
                         Image(systemName: "mappin.and.ellipse")
-                        Text(formatarLocalizacao(cidade: postagem.cidade, bairro: postagem.bairro))
+                        Text(viewModel.formatarLocalizacao(cidade: postagem.cidade, bairro: postagem.bairro))
+                            .lineLimit(1)
                     }
                     .font(.caption2)
                     .foregroundColor(.iconeSelecionado)
@@ -56,28 +57,13 @@ struct CardPostagem: View {
             Button(action: {
                 viewModel.toggleFavorito(postagem: postagem)
             }) {
-                Image(systemName: postagem.favorito ? "heart.fill" : "heart")
+                Image(systemName: postagem.favorito ? "heart.fill" : "heart.fill")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 30, height: 30)
                     .foregroundColor(postagem.favorito ? .verdePrincipal : .white)
                     .padding(10)
             }
-        }
-    }
-    
-    private func formatarLocalizacao(cidade: String?, bairro: String?) -> String {
-        let cidadeFormatada = cidade?.isEmpty ?? true ? nil : cidade
-        let bairroFormatado = bairro?.isEmpty ?? true ? nil : bairro
-        
-        if let cidade = cidadeFormatada, let bairro = bairroFormatado {
-            return "\(cidade) - \(bairro)"
-        } else if let cidade = cidadeFormatada {
-            return cidade
-        } else if let bairro = bairroFormatado {
-            return bairro
-        } else {
-            return "Localização desconhecida"
         }
     }
 }

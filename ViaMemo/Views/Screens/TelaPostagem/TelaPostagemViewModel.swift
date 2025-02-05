@@ -80,7 +80,7 @@ class TelaPostagemViewModel: ObservableObject {
         self.imagemSelecionadaItem = nil
     }
     
-    private func salvarContexto() {
+    func salvarContexto() {
         do {
             try context.save()
             fetchPostagens()
@@ -88,7 +88,19 @@ class TelaPostagemViewModel: ObservableObject {
             print("Erro ao salvar contexto: \(error)")
         }
     }
+
+    func atualizarPostagem(postagem: Postagem, titulo: String, notas: String) {
+        postagem.titulo = titulo
+        postagem.notas = notas
+        salvarContexto()
+    }
     
+    func excluirPostagem(postagem: Postagem) {
+        context.delete(postagem)
+        salvarContexto()
+    }
+
+
     func selecionarImagem() {
         guard let pickerItem = imagemSelecionadaItem else { return }
         Task {
@@ -128,11 +140,11 @@ class TelaPostagemViewModel: ObservableObject {
                     let geocoder = CLGeocoder()
                     geocoder.reverseGeocodeLocation(location) { placemarks, error in
                         if let placemark = placemarks?.first, error == nil {
-                            self.cidade = placemark.locality ?? "Cidade desconhecida"
-                            self.bairro = placemark.subLocality ?? "Bairro desconhecido"
+                            self.cidade = placemark.locality ?? ""
+                            self.bairro = placemark.subLocality ?? ""
                         } else {
-                            self.cidade = "Cidade desconhecida"
-                            self.bairro = "Bairro desconhecido"
+                            self.cidade = ""
+                            self.bairro = ""
                         }
                     }
                 }
@@ -140,7 +152,21 @@ class TelaPostagemViewModel: ObservableObject {
         }
     }
     
-    
+    func formatarLocalizacao(cidade: String?, bairro: String?) -> String {
+        let cidadeFormatada = cidade?.isEmpty ?? true ? nil : cidade
+        let bairroFormatado = bairro?.isEmpty ?? true ? nil : bairro
+
+        if let cidade = cidadeFormatada, let bairro = bairroFormatado {
+            return "\(cidade) - \(bairro)"
+        } else if let cidade = cidadeFormatada {
+            return cidade
+        } else if let bairro = bairroFormatado {
+            return bairro
+        } else {
+            return "Local não encontrado"
+        }
+    }
+
     func toggleFavorito(postagem: Postagem) {
         postagem.favorito.toggle()
         salvarContexto()

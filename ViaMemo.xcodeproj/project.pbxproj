@@ -16,6 +16,7 @@
 		7F6D7F772D52836800C34A6B /* CardPostagem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6D7F762D52836800C34A6B /* CardPostagem.swift */; };
 		7F6D7F792D5283A000C34A6B /* TelaPostagem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6D7F782D5283A000C34A6B /* TelaPostagem.swift */; };
 		7FE875D82D5282A100917F43 /* TelaPostagemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE875D72D5282A100917F43 /* TelaPostagemViewModel.swift */; };
+		7FEC354A2D53FDDF0096697D /* SheetDetalhesPostagem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FEC35492D53FDDF0096697D /* SheetDetalhesPostagem.swift */; };
 		AB5BFE242D4D646B006D4EED /* BotaoCategoria.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5BFE232D4D646B006D4EED /* BotaoCategoria.swift */; };
 		AB65006D2D52831200F38C34 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB65006C2D52831200F38C34 /* SearchBar.swift */; };
 		AB81ABD12D4BEEB50021D7E6 /* ViaMemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB81ABD02D4BEEB50021D7E6 /* ViaMemoApp.swift */; };
@@ -40,6 +41,7 @@
 		7F6D7F762D52836800C34A6B /* CardPostagem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPostagem.swift; sourceTree = "<group>"; };
 		7F6D7F782D5283A000C34A6B /* TelaPostagem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaPostagem.swift; sourceTree = "<group>"; };
 		7FE875D72D5282A100917F43 /* TelaPostagemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaPostagemViewModel.swift; sourceTree = "<group>"; };
+		7FEC35492D53FDDF0096697D /* SheetDetalhesPostagem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetDetalhesPostagem.swift; sourceTree = "<group>"; };
 		AB5BFE232D4D646B006D4EED /* BotaoCategoria.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BotaoCategoria.swift; sourceTree = "<group>"; };
 		AB65006C2D52831200F38C34 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		AB81ABCD2D4BEEB50021D7E6 /* ViaMemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViaMemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -166,6 +168,7 @@
 		AB81ABE72D4C17010021D7E6 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				7FEC35492D53FDDF0096697D /* SheetDetalhesPostagem.swift */,
 				7FE875D62D52827A00917F43 /* TelaPostagem */,
 				42A56E7B2D515C2200C9F117 /* TelaDesejos */,
 				AB81ABF22D4C1F900021D7E6 /* TelaInicial.swift */,
@@ -261,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB81ABDA2D4BEEB60021D7E6 /* Persistence.swift in Sources */,
+				7FEC354A2D53FDDF0096697D /* SheetDetalhesPostagem.swift in Sources */,
 				AB81ABD32D4BEEB50021D7E6 /* ContentView.swift in Sources */,
 				AB5BFE242D4D646B006D4EED /* BotaoCategoria.swift in Sources */,
 				AB81ABF12D4C1F730021D7E6 /* TesteView.swift in Sources */,

@@ -10,6 +10,7 @@ import SwiftUI
 struct TelaPostagem: View {
     @ObservedObject var viewModel: TelaPostagemViewModel
     @State private var mostrarSheet = false
+    @State private var postagemSelecionada: Postagem?
     @State private var procurar: String = ""
     @State private var categoriaViewModel = BotaoCategoriaViewModel()
     
@@ -30,18 +31,17 @@ struct TelaPostagem: View {
                 .padding(.horizontal)
             }
             
-            if (viewModel.postagens.isEmpty){
-                if (viewModel.buscaAtiva){
+            if viewModel.postagens.isEmpty {
+                if viewModel.buscaAtiva {
                     ContentUnavailableView.search(text: viewModel.textoProcura)
-                } else{
+                } else {
                     ContentUnavailableView(
                         "Nenhuma postagem",
                         systemImage: "photo.on.rectangle",
                         description: Text("Comece criando sua primeira postagem!")
                     )
                 }
-            }
-            else {
+            } else {
                 // Lista de Postagens
                 ScrollView {
                     LazyVGrid(
@@ -53,6 +53,9 @@ struct TelaPostagem: View {
                     ) {
                         ForEach(viewModel.postagens, id: \.id) { postagem in
                             CardPostagem(postagem: postagem, viewModel: viewModel)
+                                .onTapGesture {
+                                    postagemSelecionada = postagem
+                                }
                         }
                     }
                     .padding(.horizontal)
@@ -83,6 +86,9 @@ struct TelaPostagem: View {
         }
         .sheet(isPresented: $mostrarSheet) {
             SheetPostagem(viewModel: viewModel)
+        }
+        .sheet(item: $postagemSelecionada) { postagem in
+            SheetDetalhesPostagem(postagem: postagem, viewModel: viewModel)
         }
     }
 }

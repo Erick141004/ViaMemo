@@ -52,8 +52,8 @@ struct SheetPostagem: View {
                     Text("Data: \(viewModel.data)")
                 }
                 
-                if !viewModel.cidade.isEmpty {
-                    Text("Cidade: \(viewModel.cidade) - \(viewModel.bairro)")
+                if !(viewModel.cidade.isEmpty && viewModel.bairro.isEmpty) {
+                    Text("Localização: \(viewModel.formatarLocalizacao(cidade: viewModel.cidade, bairro: viewModel.bairro))")
                 }
                 
             }
