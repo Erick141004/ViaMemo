@@ -23,6 +23,8 @@ class TelaPostagemViewModel: ObservableObject {
     @Published var textoProcura: String = ""
     @Published var buscaAtiva: Bool = false
     
+    @Published var categoriaSelecionada: Categoria?
+    
     private let container: NSPersistentContainer
     private let context: NSManagedObjectContext
     
@@ -32,22 +34,38 @@ class TelaPostagemViewModel: ObservableObject {
         fetchPostagens()
     }
     
+    func filtrarPorCategoria(nome: String) -> Categoria?{
+            let request: NSFetchRequest<Categoria> = Categoria.fetchRequest()
+            request.predicate = NSPredicate(format: "nome == %@", nome)
+        
+            do {
+                let categorias = try context.fetch(request)
+                categoriaSelecionada = categorias.first
+                return categoriaSelecionada
+            } catch {
+                print("Erro ao buscar categoria: \(error)")
+            }
+        
+            return nil
+        }
+    
     func fetchPostagens() {
         let request: NSFetchRequest<Postagem> = Postagem.fetchRequest()
-        
-        print("Entrou aqui para fazer a busca")
+        var predicates = [NSPredicate]()
         
         if !textoProcura.isEmpty {
-            request.predicate = NSPredicate(
+            predicates.append(NSPredicate(
                 format: "titulo CONTAINS[cd] %@ OR bairro CONTAINS[cd] %@ OR cidade CONTAINS[cd] %@",
                 textoProcura, textoProcura, textoProcura
-            )
-            buscaAtiva = true
-        } else {
-            request.predicate = nil
-            buscaAtiva = false
+            ))
         }
         
+        if let categoria = categoriaSelecionada {
+            predicates.append(NSPredicate(format: "ANY postagemCategoria == %@", categoria))
+        }
+            
+        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+            
         do {
             postagens = try context.fetch(request)
         } catch {
@@ -55,7 +73,7 @@ class TelaPostagemViewModel: ObservableObject {
         }
     }
     
-    func adicionarPostagem() {
+    func adicionarPostagem(categoria: String) {
         let novaPostagem = Postagem(context: context)
         novaPostagem.id = UUID()
         novaPostagem.titulo = titulo
@@ -64,6 +82,8 @@ class TelaPostagemViewModel: ObservableObject {
         novaPostagem.bairro = bairro
         novaPostagem.data = data
         novaPostagem.favorito = false
+        
+        novaPostagem.postagemCategoria = filtrarPorCategoria(nome: categoria)
         
         if let imagemData = imagemSelecionada?.jpegData(compressionQuality: 0.8) {
             novaPostagem.imagem = imagemData
@@ -170,5 +190,38 @@ class TelaPostagemViewModel: ObservableObject {
     func toggleFavorito(postagem: Postagem) {
         postagem.favorito.toggle()
         salvarContexto()
+    }
+}
+
+extension PersistenceController {
+    func criarCategoriasPadrao() {
+        let context = container.viewContext
+        
+        let categoriasPadrao = [
+            "Favoritos",
+            "Montanha",
+            "Praia",
+            "Natureza",
+            "Campo",
+            "Outros"
+        ]
+        
+        let request: NSFetchRequest<Categoria> = Categoria.fetchRequest()
+        
+        do {
+            let count = try context.count(for: request)
+            
+            if count == 0 {
+                for nome in categoriasPadrao {
+                    let novaCategoria = Categoria(context: context)
+                    novaCategoria.nome = nome
+                }
+                
+                try context.save()
+                print("Categorias padrão criadas!")
+            }
+        } catch {
+            print("Erro ao criar categorias padrão: \(error)")
+        }
     }
 }

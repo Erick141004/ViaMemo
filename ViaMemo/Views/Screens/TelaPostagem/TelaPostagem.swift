@@ -12,24 +12,25 @@ struct TelaPostagem: View {
     @State private var mostrarSheet = false
     @State private var postagemSelecionada: Postagem?
     @State private var procurar: String = ""
-    @State private var categoriaViewModel = BotaoCategoriaViewModel()
+    @StateObject private var categoriaViewModel = BotaoCategoriaViewModel()
     
     var body: some View {
         VStack {
-            // Barra de Pesquisa
             SearchBar(textoPesquisa: $viewModel.textoProcura, buscarItens: viewModel.fetchPostagens)
-            
+
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
                     ForEach(categoriaViewModel.nomeCategoria, id: \.self) { categoria in
-                        BotaoCategoria(categoria: categoria)
-                            .onTapGesture {
-                                categoriaViewModel.filtrarCategoria(categoria: categoria)
-                            }
+                        BotaoCategoria(categoria: categoria){
+                            let categoriaExtraida = categoriaViewModel.extrairCategoria(categoria: categoria)
+                            let _ = viewModel.filtrarPorCategoria(nome: categoriaExtraida)
+                            viewModel.fetchPostagens()
+                        }
                     }
                 }
                 .padding(.horizontal)
             }
+            .padding(.vertical, 10)
             
             if viewModel.postagens.isEmpty {
                 if viewModel.buscaAtiva {
@@ -41,15 +42,15 @@ struct TelaPostagem: View {
                         description: Text("Comece criando sua primeira postagem!")
                     )
                 }
-            } else {
-                // Lista de Postagens
+            }
+            else {
                 ScrollView {
                     LazyVGrid(
                         columns: [
-                            GridItem(.flexible(), spacing: 16), // Aumenta o espaçamento entre as colunas
+                            GridItem(.flexible(), spacing: 16),
                             GridItem(.flexible(), spacing: 16)
                         ],
-                        spacing: 16 // Espaçamento entre as linhas
+                        spacing: 16
                     ) {
                         ForEach(viewModel.postagens, id: \.id) { postagem in
                             CardPostagem(postagem: postagem, viewModel: viewModel)
