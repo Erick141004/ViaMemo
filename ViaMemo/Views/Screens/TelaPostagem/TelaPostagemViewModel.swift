@@ -23,6 +23,8 @@ class TelaPostagemViewModel: ObservableObject {
     @Published var textoProcura: String = ""
     @Published var buscaAtiva: Bool = false
     
+    @Published var categoriaSelecionada: Categoria?
+    
     private let container: NSPersistentContainer
     private let context: NSManagedObjectContext
     
@@ -32,22 +34,38 @@ class TelaPostagemViewModel: ObservableObject {
         fetchPostagens()
     }
     
+    func filtrarPorCategoria(nome: String) -> Categoria?{
+            let request: NSFetchRequest<Categoria> = Categoria.fetchRequest()
+            request.predicate = NSPredicate(format: "nome == %@", nome)
+        
+            do {
+                let categorias = try context.fetch(request)
+                categoriaSelecionada = categorias.first
+                return categoriaSelecionada
+            } catch {
+                print("Erro ao buscar categoria: \(error)")
+            }
+        
+            return nil
+        }
+    
     func fetchPostagens() {
         let request: NSFetchRequest<Postagem> = Postagem.fetchRequest()
-        
-        print("Entrou aqui para fazer a busca")
+        var predicates = [NSPredicate]()
         
         if !textoProcura.isEmpty {
-            request.predicate = NSPredicate(
+            predicates.append(NSPredicate(
                 format: "titulo CONTAINS[cd] %@ OR bairro CONTAINS[cd] %@ OR cidade CONTAINS[cd] %@",
                 textoProcura, textoProcura, textoProcura
-            )
-            buscaAtiva = true
-        } else {
-            request.predicate = nil
-            buscaAtiva = false
+            ))
         }
         
+        if let categoria = categoriaSelecionada {
+            predicates.append(NSPredicate(format: "ANY postagemCategoria == %@", categoria))
+        }
+            
+        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+            
         do {
             postagens = try context.fetch(request)
         } catch {
@@ -55,7 +73,7 @@ class TelaPostagemViewModel: ObservableObject {
         }
     }
     
-    func adicionarPostagem() {
+    func adicionarPostagem(categoria: String) {
         let novaPostagem = Postagem(context: context)
         novaPostagem.id = UUID()
         novaPostagem.titulo = titulo
@@ -64,6 +82,8 @@ class TelaPostagemViewModel: ObservableObject {
         novaPostagem.bairro = bairro
         novaPostagem.data = data
         novaPostagem.favorito = false
+        
+        novaPostagem.postagemCategoria = filtrarPorCategoria(nome: categoria)
         
         if let imagemData = imagemSelecionada?.jpegData(compressionQuality: 0.8) {
             novaPostagem.imagem = imagemData
@@ -80,7 +100,7 @@ class TelaPostagemViewModel: ObservableObject {
         self.imagemSelecionadaItem = nil
     }
     
-    private func salvarContexto() {
+    func salvarContexto() {
         do {
             try context.save()
             fetchPostagens()
@@ -88,7 +108,19 @@ class TelaPostagemViewModel: ObservableObject {
             print("Erro ao salvar contexto: \(error)")
         }
     }
+
+    func atualizarPostagem(postagem: Postagem, titulo: String, notas: String) {
+        postagem.titulo = titulo
+        postagem.notas = notas
+        salvarContexto()
+    }
     
+    func excluirPostagem(postagem: Postagem) {
+        context.delete(postagem)
+        salvarContexto()
+    }
+
+
     func selecionarImagem() {
         guard let pickerItem = imagemSelecionadaItem else { return }
         Task {
@@ -128,11 +160,11 @@ class TelaPostagemViewModel: ObservableObject {
                     let geocoder = CLGeocoder()
                     geocoder.reverseGeocodeLocation(location) { placemarks, error in
                         if let placemark = placemarks?.first, error == nil {
-                            self.cidade = placemark.locality ?? "Cidade desconhecida"
-                            self.bairro = placemark.subLocality ?? "Bairro desconhecido"
+                            self.cidade = placemark.locality ?? ""
+                            self.bairro = placemark.subLocality ?? ""
                         } else {
-                            self.cidade = "Cidade desconhecida"
-                            self.bairro = "Bairro desconhecido"
+                            self.cidade = ""
+                            self.bairro = ""
                         }
                     }
                 }
@@ -140,9 +172,56 @@ class TelaPostagemViewModel: ObservableObject {
         }
     }
     
-    
+    func formatarLocalizacao(cidade: String?, bairro: String?) -> String {
+        let cidadeFormatada = cidade?.isEmpty ?? true ? nil : cidade
+        let bairroFormatado = bairro?.isEmpty ?? true ? nil : bairro
+
+        if let cidade = cidadeFormatada, let bairro = bairroFormatado {
+            return "\(cidade) - \(bairro)"
+        } else if let cidade = cidadeFormatada {
+            return cidade
+        } else if let bairro = bairroFormatado {
+            return bairro
+        } else {
+            return "Local não encontrado"
+        }
+    }
+
     func toggleFavorito(postagem: Postagem) {
         postagem.favorito.toggle()
         salvarContexto()
+    }
+}
+
+extension PersistenceController {
+    func criarCategoriasPadrao() {
+        let context = container.viewContext
+        
+        let categoriasPadrao = [
+            "Favoritos",
+            "Montanha",
+            "Praia",
+            "Natureza",
+            "Campo",
+            "Outros"
+        ]
+        
+        let request: NSFetchRequest<Categoria> = Categoria.fetchRequest()
+        
+        do {
+            let count = try context.count(for: request)
+            
+            if count == 0 {
+                for nome in categoriasPadrao {
+                    let novaCategoria = Categoria(context: context)
+                    novaCategoria.nome = nome
+                }
+                
+                try context.save()
+                print("Categorias padrão criadas!")
+            }
+        } catch {
+            print("Erro ao criar categorias padrão: \(error)")
+        }
     }
 }

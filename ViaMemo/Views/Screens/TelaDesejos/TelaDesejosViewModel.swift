@@ -18,37 +18,59 @@ class TelaDesejosViewModel: ObservableObject {
     @Published var textoProcura: String = ""
     @Published var buscaAtiva: Bool = false
     
+    @Published var categoriaSelecionada: Categoria?
+    
     init() {
         self.container = PersistenceController.shared.container
         self.contexto = container.viewContext
         fetchDesejos()
     }
     
+    func filtrarPorCategoria(nome: String) -> Categoria?{
+        let request: NSFetchRequest<Categoria> = Categoria.fetchRequest()
+        request.predicate = NSPredicate(format: "nome == %@", nome)
+        
+        do {
+            let categorias = try contexto.fetch(request)
+            categoriaSelecionada = categorias.first
+            return categoriaSelecionada
+        } catch {
+            print("Erro ao buscar categoria: \(error)")
+        }
+        
+        return nil
+    }
+    
     func fetchDesejos() {
         let request: NSFetchRequest<ListaDesejos> = ListaDesejos.fetchRequest()
+        var predicates = [NSPredicate]()
         
         if !textoProcura.isEmpty {
-            request.predicate = NSPredicate(
+            predicates.append(NSPredicate(
                 format: "titulo CONTAINS[cd] %@ OR local CONTAINS[cd] %@",
-                textoProcura, textoProcura, textoProcura
-            )
-            buscaAtiva = true
-        } else {
-            request.predicate = nil
-            buscaAtiva = false
+                textoProcura, textoProcura
+            ))
         }
+        
+        if let categoria = categoriaSelecionada {
+            predicates.append(NSPredicate(format: "ANY desejoCategoria == %@", categoria))
+        }
+        
+        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         
         do {
             desejos = try contexto.fetch(request)
         } catch {
-            print("Erro ao buscar o desejo: \(error)")
+            print("Erro ao buscar postagens: \(error)")
         }
     }
     
-    func adicionarDesejo(titulo: String, local: String) {
+    func adicionarDesejo(titulo: String, local: String, categoria: String) {
         let novoDesejo = ListaDesejos(context: contexto)
         novoDesejo.local = local
         novoDesejo.titulo = titulo
+        novoDesejo.desejoCategoria = filtrarPorCategoria(nome: categoria)
+        
         salvarContexto()
     }
     

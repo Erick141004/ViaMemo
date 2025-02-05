@@ -11,6 +11,8 @@ import PhotosUI
 struct SheetPostagem: View {
     @ObservedObject var viewModel: TelaPostagemViewModel
     @Environment(\.dismiss) var dismiss
+    @State var categoriaSelecionada: String = ""
+    @StateObject var categoriaViewModel = BotaoCategoriaViewModel()
     
     private var podeSalvar: Bool {
         return viewModel.imagemSelecionada != nil && !viewModel.titulo.isEmpty
@@ -48,12 +50,20 @@ struct SheetPostagem: View {
                         .lineLimit(10)
                 }
                 
+                Section(header: Text("Categoria")){
+                    Picker("Categoria",selection: $categoriaSelecionada){
+                        ForEach(categoriaViewModel.nomeCategoria, id: \.self) {
+                            Text($0)
+                        }
+                    }
+                }
+                
                 if !viewModel.data.isEmpty {
                     Text("Data: \(viewModel.data)")
                 }
                 
-                if !viewModel.cidade.isEmpty {
-                    Text("Cidade: \(viewModel.cidade) - \(viewModel.bairro)")
+                if !(viewModel.cidade.isEmpty && viewModel.bairro.isEmpty) {
+                    Text("Localização: \(viewModel.formatarLocalizacao(cidade: viewModel.cidade, bairro: viewModel.bairro))")
                 }
                 
             }
@@ -69,7 +79,7 @@ struct SheetPostagem: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Salvar") {
-                        viewModel.adicionarPostagem()
+                        viewModel.adicionarPostagem(categoria: categoriaViewModel.extrairCategoria(categoria: categoriaSelecionada))
                         limparCampos()
                         dismiss()
                     }
@@ -85,6 +95,13 @@ struct SheetPostagem: View {
         viewModel.notas = ""
         viewModel.cidade = ""
         viewModel.data = ""
+        categoriaSelecionada = ""
     }
     
+}
+
+#Preview {
+    var vm = TelaPostagemViewModel()
+    
+    return SheetPostagem(viewModel: vm)
 }

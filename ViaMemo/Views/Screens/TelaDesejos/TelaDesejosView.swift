@@ -11,7 +11,7 @@ import CoreData
 struct TelaDesejosView: View {
     @ObservedObject var viewModel: TelaDesejosViewModel
     @State var mostrarSheet = false
-    @State var categoriaViewModel = BotaoCategoriaViewModel()
+    @StateObject var categoriaViewModel = BotaoCategoriaViewModel()
     @State private var procurar: String = ""
     
     var body: some View {
@@ -21,10 +21,11 @@ struct TelaDesejosView: View {
             ScrollView(.horizontal, showsIndicators: false){
                 HStack{
                     ForEach(categoriaViewModel.nomeCategoria, id: \.self){ categoria in
-                        BotaoCategoria(categoria: categoria)
-                            .onTapGesture {
-                                categoriaViewModel.filtrarCategoria(categoria: categoria)
-                            }
+                        BotaoCategoria(categoria: categoria){
+                            let categoriaExtraida = categoriaViewModel.extrairCategoria(categoria: categoria)
+                            let _ = viewModel.filtrarPorCategoria(nome: categoriaExtraida)
+                            viewModel.fetchDesejos()
+                        }
                     }
                 }
                 .padding(.horizontal)

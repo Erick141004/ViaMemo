@@ -6,28 +6,32 @@
 //
 
 import SwiftUI
+import CoreData
+import Foundation
 
-struct BotaoCategoriaViewModel {
-    var nomeCategoria: [String] =
+class BotaoCategoriaViewModel: ObservableObject {
+    @Published var nomeCategoria: [String] =
         ["Favoritos ❤️", "Montanha ⛰️", "Praia 🏖️", "Natureza 🍃", "Campo 🏕️", "Outros ✈️"]
     
-    mutating func filtrarCategoria(categoria: String){
+    func extrairCategoria(categoria: String) -> String{
          let categoriaSeparada = categoria.split(separator: " ")
-         let categoriaTratada = categoriaSeparada[0]
-         
-         //TODO: Logica de filtrar categorias
-         print("Tem que fazer a logica de selecionar as categorias \(categoriaTratada)")
+         print(categoriaSeparada[0])
+         return String(categoriaSeparada[0])
     }
 }
 
 struct BotaoCategoria: View {
     var categoria: String
+    var tapCategoria: () -> Void = {}
     
     var body: some View {
         VStack(alignment: .center){
             Text(categoria)
                 .font(.subheadline)
                 .foregroundStyle(.iconeSelecionado)
+        }
+        .onTapGesture {
+            tapCategoria()
         }
         .padding(.horizontal, 20)
         .padding(.vertical, 8)

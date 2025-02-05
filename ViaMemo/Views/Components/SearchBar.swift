@@ -8,14 +8,6 @@
 import SwiftUI
 import CoreData
 
-struct SearchBarViewModel{
-    var textoPesquisa: String
-    
-    mutating func pesquisarTexto(){
-        
-    }
-}
-
 struct SearchBar: View {
     @Binding var textoPesquisa: String
     var buscarItens: () -> Void = {}
@@ -53,10 +45,4 @@ struct SearchBar: View {
 
 #Preview {
     SearchBar(textoPesquisa: .constant("Testeeee"))
-}
-
-protocol Searchable {
-    associatedtype Entity: NSManagedObject
-    var searchText: String { get set }
-    func fetchResults()
 }
