@@ -28,7 +28,6 @@
 		AB81ABDD2D4BEEB60021D7E6 /* ViaMemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AB81ABDB2D4BEEB60021D7E6 /* ViaMemo.xcdatamodeld */; };
 		AB81ABEB2D4C1F3E0021D7E6 /* SwiftData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB81ABEA2D4C1F3E0021D7E6 /* SwiftData.swift */; };
 		AB81ABEF2D4C1F6A0021D7E6 /* CardInicial.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB81ABEE2D4C1F6A0021D7E6 /* CardInicial.swift */; };
-		AB81ABF12D4C1F730021D7E6 /* TesteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB81ABF02D4C1F730021D7E6 /* TesteView.swift */; };
 		AB81ABF32D4C1F900021D7E6 /* TelaInicial.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB81ABF22D4C1F900021D7E6 /* TelaInicial.swift */; };
 /* End PBXBuildFile section */
 
@@ -56,7 +55,6 @@
 		AB81ABDC2D4BEEB60021D7E6 /* ViaMemo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ViaMemo.xcdatamodel; sourceTree = "<group>"; };
 		AB81ABEA2D4C1F3E0021D7E6 /* SwiftData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftData.swift; sourceTree = "<group>"; };
 		AB81ABEE2D4C1F6A0021D7E6 /* CardInicial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInicial.swift; sourceTree = "<group>"; };
-		AB81ABF02D4C1F730021D7E6 /* TesteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TesteView.swift; sourceTree = "<group>"; };
 		AB81ABF22D4C1F900021D7E6 /* TelaInicial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaInicial.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -130,7 +128,6 @@
 		AB81ABE32D4C16D10021D7E6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				42573E792D4D4AD000A34AF0 /* TabBar.swift */,
 				AB81ABE92D4C17480021D7E6 /* SwiftData */,
 				AB81ABE82D4C173F0021D7E6 /* CoreData */,
 			);
@@ -140,7 +137,6 @@
 		AB81ABE42D4C16DF0021D7E6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				AB81ABF02D4C1F730021D7E6 /* TesteView.swift */,
 				AB81ABE72D4C17010021D7E6 /* Screens */,
 				AB81ABE62D4C16F80021D7E6 /* Components */,
 			);
@@ -159,6 +155,7 @@
 		AB81ABE62D4C16F80021D7E6 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				42573E792D4D4AD000A34AF0 /* TabBar.swift */,
 				42573E7B2D4D4E2800A34AF0 /* SheetDesejo.swift */,
 				AB81ABEE2D4C1F6A0021D7E6 /* CardInicial.swift */,
 				AB5BFE232D4D646B006D4EED /* BotaoCategoria.swift */,
@@ -273,7 +270,6 @@
 				7FEC354A2D53FDDF0096697D /* SheetDetalhesPostagem.swift in Sources */,
 				AB81ABD32D4BEEB50021D7E6 /* ContentView.swift in Sources */,
 				AB5BFE242D4D646B006D4EED /* BotaoCategoria.swift in Sources */,
-				AB81ABF12D4C1F730021D7E6 /* TesteView.swift in Sources */,
 				42573E7C2D4D4E2800A34AF0 /* SheetDesejo.swift in Sources */,
 				AB81ABF32D4C1F900021D7E6 /* TelaInicial.swift in Sources */,
 				7FE875D82D5282A100917F43 /* TelaPostagemViewModel.swift in Sources */,

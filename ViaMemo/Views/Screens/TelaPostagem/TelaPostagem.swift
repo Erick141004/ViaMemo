@@ -79,6 +79,7 @@ struct TelaPostagem: View {
                             CardPostagem(postagem: postagem, viewModel: viewModel)
                                 .onTapGesture {
                                     postagemSelecionada = postagem
+                                    print(postagem)
                                 }
                         }
                     }

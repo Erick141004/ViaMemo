@@ -90,6 +90,7 @@ class TelaPostagemViewModel: ObservableObject {
         novaPostagem.favorito = false
         
         novaPostagem.postagemCategoria = filtrarPorCategoria(nome: categoria)
+        categoriaSelecionada = nil
         
         if let imagemData = imagemSelecionada?.jpegData(compressionQuality: 0.8) {
             novaPostagem.imagem = imagemData

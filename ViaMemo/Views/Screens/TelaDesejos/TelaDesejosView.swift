@@ -60,7 +60,7 @@ struct TelaDesejosView: View {
             else {
                 List {
                     ForEach(viewModel.desejos, id: \.self) { desejo in
-                        CardDesejo(desejo: desejo)
+                        CardDesejo(desejo: desejo, viewModel: viewModel)
                             .listRowBackground(Color.clear)
                             .scrollContentBackground(.hidden)
                             .listRowSeparator(.hidden)
