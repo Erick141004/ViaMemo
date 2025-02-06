@@ -37,7 +37,7 @@ struct SearchBar: View {
         }
         .padding(.horizontal, 15)
         .padding(.vertical, 3)
-        .background(RoundedRectangle(cornerRadius: 10).fill(.verdeBotao))
+        .background(RoundedRectangle(cornerRadius: 10).fill(.verdePrincipal))
         .frame(height: 50)
         .padding(.horizontal, 15)
         .background(Color.clear.ignoresSafeArea(.keyboard))

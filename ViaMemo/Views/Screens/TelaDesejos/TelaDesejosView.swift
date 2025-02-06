@@ -50,11 +50,12 @@ struct TelaDesejosView: View {
                 if (viewModel.buscaAtiva){
                     ContentUnavailableView.search(text: viewModel.textoProcura)
                 } else{
-                    ContentUnavailableView(
-                        "Nenhuma postagem",
-                        systemImage: "photo.on.rectangle",
-                        description: Text("Comece criando sua primeira postagem!")
-                    )
+                    ContentUnavailableView{
+                        Label("Nenhuma postagem", image: "coqueiro")
+                    }
+                    description: {
+                        Text("Crie os seus lugares mais desejados!")
+                    }
                 }
             }
             else {

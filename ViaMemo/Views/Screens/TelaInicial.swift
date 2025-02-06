@@ -39,7 +39,7 @@ struct LogoInicial: View {
         Image("Logo")
             .resizable()
             .frame(maxWidth: 100, maxHeight: 100)
-            .offset(y: -177)
+            .offset(y: -180)
             .zIndex(1.5)
     }
 }

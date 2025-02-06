@@ -59,11 +59,12 @@ struct TelaPostagem: View {
                 if viewModel.buscaAtiva {
                     ContentUnavailableView.search(text: viewModel.textoProcura)
                 } else {
-                    ContentUnavailableView(
-                        "Nenhuma postagem",
-                        systemImage: "photo.on.rectangle",
-                        description: Text("Comece criando sua primeira postagem!")
-                    )
+                    ContentUnavailableView{
+                        Label("Nenhuma postagem", image: "coqueiro")
+                    }
+                    description: {
+                        Text("Comece criando a sua primeira postagem!")
+                    }
                 }
             }
             else {
