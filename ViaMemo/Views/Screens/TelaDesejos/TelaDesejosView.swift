@@ -13,6 +13,7 @@ struct TelaDesejosView: View {
     @State var mostrarSheet = false
     @StateObject var categoriaViewModel = BotaoCategoriaViewModel()
     @State private var procurar: String = ""
+    @State private var categoriaSelecionada: String = ""
     
     var body: some View {
         VStack{
@@ -21,11 +22,24 @@ struct TelaDesejosView: View {
             ScrollView(.horizontal, showsIndicators: false){
                 HStack{
                     ForEach(categoriaViewModel.nomeCategoria, id: \.self){ categoria in
-                        BotaoCategoria(categoria: categoria){
-                            let categoriaExtraida = categoriaViewModel.extrairCategoria(categoria: categoria)
-                            let _ = viewModel.filtrarPorCategoria(nome: categoriaExtraida)
-                            viewModel.fetchDesejos()
-                        }
+                        BotaoCategoria(
+                            categoria: categoria,
+                            tapCategoria: {
+                                let categoriaExtraida = categoriaViewModel.extrairCategoria(categoria: categoria)
+                                let _ = viewModel.filtrarPorCategoria(nome: categoriaExtraida)
+                                viewModel.fetchDesejos()
+                                
+                                if categoriaSelecionada != categoria{
+                                    categoriaSelecionada = categoria
+                                }
+                                else {
+                                    categoriaSelecionada = ""
+                                    viewModel.categoriaSelecionada = nil
+                                    viewModel.fetchDesejos()
+                                }
+                                
+                            },
+                            selecionado: categoriaSelecionada == categoria)
                     }
                 }
                 .padding(.horizontal)

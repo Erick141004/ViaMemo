@@ -13,6 +13,7 @@ struct TelaPostagem: View {
     @State private var postagemSelecionada: Postagem?
     @State private var procurar: String = ""
     @StateObject private var categoriaViewModel = BotaoCategoriaViewModel()
+    @State private var categoriaSelecionada: String = ""
     
     var body: some View {
         VStack {
@@ -21,11 +22,24 @@ struct TelaPostagem: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
                     ForEach(categoriaViewModel.nomeCategoria, id: \.self) { categoria in
-                        BotaoCategoria(categoria: categoria){
-                            let categoriaExtraida = categoriaViewModel.extrairCategoria(categoria: categoria)
-                            let _ = viewModel.filtrarPorCategoria(nome: categoriaExtraida)
-                            viewModel.fetchPostagens()
-                        }
+                        BotaoCategoria(
+                            categoria: categoria,
+                            tapCategoria: {
+                                let categoriaExtraida = categoriaViewModel.extrairCategoria(categoria: categoria)
+                                let _ = viewModel.filtrarPorCategoria(nome: categoriaExtraida)
+                                viewModel.fetchPostagens()
+                                
+                                if categoriaSelecionada != categoria{
+                                    categoriaSelecionada = categoria
+                                }
+                                else {
+                                    categoriaSelecionada = ""
+                                    viewModel.categoriaSelecionada = nil
+                                    viewModel.fetchPostagens()
+                                }
+                            },
+                            selecionado: categoriaSelecionada == categoria
+                        )
                     }
                 }
                 .padding(.horizontal)

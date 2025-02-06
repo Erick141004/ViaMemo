@@ -11,7 +11,7 @@ import CoreData
 struct SheetDesejo: View {
     @ObservedObject var viewModel: TelaDesejosViewModel
     @Environment(\.dismiss) var dismiss
-    @State var categoriaSelecionada: String = ""
+    @State var categoriaSelecionada: String = "Montanha ⛰️"
     @StateObject var categoriaViewModel = BotaoCategoriaViewModel()
     
     private var podeSalvar: Bool {

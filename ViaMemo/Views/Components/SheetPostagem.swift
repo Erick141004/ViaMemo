@@ -11,7 +11,7 @@ import PhotosUI
 struct SheetPostagem: View {
     @ObservedObject var viewModel: TelaPostagemViewModel
     @Environment(\.dismiss) var dismiss
-    @State var categoriaSelecionada: String = ""
+    @State var categoriaSelecionada: String = "Montanha ⛰️"
     @StateObject var categoriaViewModel = BotaoCategoriaViewModel()
     
     private var podeSalvar: Bool {

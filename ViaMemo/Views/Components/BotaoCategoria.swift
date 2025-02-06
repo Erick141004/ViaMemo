@@ -12,6 +12,7 @@ import Foundation
 class BotaoCategoriaViewModel: ObservableObject {
     @Published var nomeCategoria: [String] =
         ["Favoritos ❤️", "Montanha ⛰️", "Praia 🏖️", "Natureza 🍃", "Campo 🏕️", "Outros ✈️"]
+    var categoriaSelecionada: String = ""
     
     func extrairCategoria(categoria: String) -> String{
          let categoriaSeparada = categoria.split(separator: " ")
@@ -23,23 +24,26 @@ class BotaoCategoriaViewModel: ObservableObject {
 struct BotaoCategoria: View {
     var categoria: String
     var tapCategoria: () -> Void = {}
+    var selecionado: Bool
     
     var body: some View {
         VStack(alignment: .center){
             Text(categoria)
                 .font(.subheadline)
-                .foregroundStyle(.iconeSelecionado)
+                .foregroundStyle(.white)
         }
         .onTapGesture {
-            tapCategoria()
+            withAnimation(.easeInOut(duration: 0.3)) {
+                tapCategoria()
+            }
         }
         .padding(.horizontal, 20)
         .padding(.vertical, 8)
-        .background(.verdeBotao)
+        .background(selecionado ? .verdeBotao : .verdeBotao.opacity(0.3))
         .clipShape(RoundedRectangle(cornerRadius: 20))
     }
 }
 
 #Preview {
-    BotaoCategoria(categoria: "Montanha ⛰️")
+    BotaoCategoria(categoria: "Montanha ⛰️", selecionado: false)
 }
