@@ -40,6 +40,7 @@ struct SearchBar: View {
         .background(RoundedRectangle(cornerRadius: 10).fill(.verdeBotao))
         .frame(height: 50)
         .padding(.horizontal, 15)
+        .background(Color.clear.ignoresSafeArea(.keyboard))
     }
 }
 
