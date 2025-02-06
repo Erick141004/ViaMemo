@@ -26,6 +26,29 @@ class TelaDesejosViewModel: ObservableObject {
         fetchDesejos()
     }
     
+    func imagemCategoria(nomeCategoria: String) -> String {
+        switch nomeCategoria.lowercased() {
+        case "praia":
+            return "praiaImagem"
+        case "montanha":
+            return "montanhaImagem"
+        case "cidade":
+            return "cidadeImagem"
+        case "deserto":
+            return "desertoImagem"
+        case "mochilao":
+            return "mochilaoImagem"
+        case "natureza":
+            return "naturezaImagem"
+        case "campo":
+            return "campoImagem"
+        case "outros":
+            return "outros"
+        default:
+            return "outros"
+        }
+    }
+
     func filtrarPorCategoria(nome: String) -> Categoria?{
         let request: NSFetchRequest<Categoria> = Categoria.fetchRequest()
         request.predicate = NSPredicate(format: "nome == %@", nome)
@@ -71,6 +94,7 @@ class TelaDesejosViewModel: ObservableObject {
         novoDesejo.titulo = titulo
         novoDesejo.desejoCategoria = filtrarPorCategoria(nome: categoria)
         
+        categoriaSelecionada = nil
         salvarContexto()
     }
     
