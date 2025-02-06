@@ -11,7 +11,7 @@ import Foundation
 
 class BotaoCategoriaViewModel: ObservableObject {
     @Published var nomeCategoria: [String] =
-        ["Favoritos ❤️", "Montanha ⛰️", "Praia 🏖️", "Natureza 🍃", "Campo 🏕️", "Outros ✈️"]
+        ["Montanha ⛰️", "Praia 🏖️", "Natureza 🍃", "Campo 🏕️", "Outros ✈️"]
     var categoriaSelecionada: String = ""
     
     func extrairCategoria(categoria: String) -> String{

@@ -25,6 +25,8 @@ class TelaPostagemViewModel: ObservableObject {
     
     @Published var categoriaSelecionada: Categoria?
     
+    @Published var favoritoSelecionado: Bool = false
+    
     private let container: NSPersistentContainer
     private let context: NSManagedObjectContext
     
@@ -63,7 +65,11 @@ class TelaPostagemViewModel: ObservableObject {
         if let categoria = categoriaSelecionada {
             predicates.append(NSPredicate(format: "ANY postagemCategoria == %@", categoria))
         }
-            
+         
+        if favoritoSelecionado{
+            predicates.append(NSPredicate(format: "favorito == YES"))
+        }
+        
         request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
             
         do {

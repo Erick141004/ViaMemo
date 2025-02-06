@@ -71,7 +71,7 @@ struct TelaDesejosView: View {
                 .listStyle(PlainListStyle())
             }
         }
-        .containerRelativeFrame([.horizontal, .vertical])
+        .ignoresSafeArea(.keyboard, edges: .bottom)
         .background(.fundo)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {

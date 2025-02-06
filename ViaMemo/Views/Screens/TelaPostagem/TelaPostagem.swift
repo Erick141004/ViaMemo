@@ -21,6 +21,14 @@ struct TelaPostagem: View {
 
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
+                    BotaoCategoria(
+                        categoria: "Favoritos ❤️",
+                        tapCategoria: {
+                            viewModel.favoritoSelecionado.toggle()
+                            viewModel.fetchPostagens()
+                        }, 
+                        selecionado: viewModel.favoritoSelecionado)
+                    
                     ForEach(categoriaViewModel.nomeCategoria, id: \.self) { categoria in
                         BotaoCategoria(
                             categoria: categoria,
