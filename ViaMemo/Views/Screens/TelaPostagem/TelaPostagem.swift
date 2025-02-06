@@ -18,6 +18,7 @@ struct TelaPostagem: View {
     var body: some View {
         VStack {
             SearchBar(textoPesquisa: $viewModel.textoProcura, buscarItens: viewModel.fetchPostagens)
+                .padding(.top, 5)
 
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
@@ -52,7 +53,7 @@ struct TelaPostagem: View {
                 }
                 .padding(.horizontal)
             }
-            .padding(.vertical, 10)
+            .padding(.bottom, 5)
             
             if viewModel.postagens.isEmpty {
                 if viewModel.buscaAtiva {
@@ -101,6 +102,7 @@ struct TelaPostagem: View {
                             .frame(width: 40)
                     }
             }
+            
             ToolbarItem(placement: .topBarTrailing) {
                 Button(action: { mostrarSheet = true }) {
                     Image(systemName: "plus")

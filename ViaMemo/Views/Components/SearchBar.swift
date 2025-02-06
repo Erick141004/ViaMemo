@@ -19,7 +19,7 @@ struct SearchBar: View {
             
             TextField("Pesquisar", text: $textoPesquisa)
                 .padding(5)
-                .background(.verdeBotao)
+                .background(.verdePrincipal)
                 .foregroundColor(.white)
                 .tint(.iconeSelecionado)
                 .onChange(of: textoPesquisa){

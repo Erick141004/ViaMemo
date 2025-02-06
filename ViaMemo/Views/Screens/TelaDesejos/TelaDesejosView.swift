@@ -18,6 +18,7 @@ struct TelaDesejosView: View {
     var body: some View {
         VStack{
             SearchBar(textoPesquisa: $viewModel.textoProcura, buscarItens: viewModel.fetchDesejos)
+                .padding(.top, 5)
             
             ScrollView(.horizontal, showsIndicators: false){
                 HStack{
@@ -89,8 +90,7 @@ struct TelaDesejosView: View {
                 Button(action: {
                     mostrarSheet = true
                 }) {
-                    Label("", systemImage: "plus")
-                        .font(.title)
+                    Image(systemName: "plus")
                         .bold()
                 }
                 .sheet(isPresented: $mostrarSheet) {

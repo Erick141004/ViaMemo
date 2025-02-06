@@ -47,7 +47,7 @@ struct SheetPostagem: View {
                 
                 Section(header: Text("Observações")) {
                     TextEditor(text: $viewModel.notas)
-                        .lineLimit(10)
+                        .lineLimit(5)
                 }
                 
                 Section(header: Text("Categoria")){

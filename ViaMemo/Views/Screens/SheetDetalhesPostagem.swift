@@ -25,38 +25,41 @@ struct SheetDetalhesPostagem: View {
         _notasEditadas = State(initialValue: postagem.notas ?? "")
     }
     
+    
+    
     var body: some View {
-        ZStack(alignment: .topTrailing) {
+        NavigationView {
             VStack(alignment: .leading) {
-                if let imageData = postagem.imagem, let uiImage = UIImage(data: imageData) {
-                    Image(uiImage: uiImage)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(minWidth: 0, maxWidth: .infinity)
-                        .clipped()
-                        .cornerRadius(12)
-                }
-                
-                VStack(alignment: .leading, spacing: 10) {
-                    ScrollView {
+                ScrollView {
+                    if let imageData = postagem.imagem, let uiImage = UIImage(data: imageData) {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(height: 450)
+                            .clipped()
+                            .cornerRadius(12)
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 10) {
                         VStack(alignment: .leading, spacing: 4) {
                             if isEditing {
                                 TextField("Titulo", text: $tituloEditado)
                                     .font(.title)
-                                    .foregroundStyle(.white)
+                                    .foregroundStyle(.textos)
                                     .bold()
                                     .cornerRadius(10)
                                     .padding(.leading, 5)
                                     .frame(height: 40)
-                                    .background(.verdePrincipal)
+                                    .background(.verdePrincipal.opacity(0.2))
                                     .cornerRadius(10)
                                     .scrollContentBackground(.hidden)
                                     .padding(.horizontal, 15)
+                                    .padding(.top)
                                 
                             } else {
                                 Text(postagem.titulo ?? "Sem título")
                                     .font(.title)
-                                    .foregroundStyle(.white)
+                                    .foregroundStyle(.textos)
                                     .bold()
                                     .padding(.leading)
                                     .padding(.top)
@@ -66,19 +69,51 @@ struct SheetDetalhesPostagem: View {
                                 .frame(height: 3)
                                 .cornerRadius(20)
                                 .padding(.horizontal)
-                                .foregroundStyle(.divisaoDetalhes)
+                                .foregroundStyle(.divisaoDetalhes.opacity(0.3))
+                                .blur(radius: 1)
                             
                             HStack {
-                                Image(systemName: "mappin.and.ellipse")
-                                    .foregroundStyle(.verdePrincipal)
-                                Text(viewModel.formatarLocalizacao(cidade: postagem.cidade, bairro: postagem.bairro))
+                                HStack {
+                                    Image(systemName: "mappin.and.ellipse")
+                                        .foregroundStyle(.verdePrincipal)
+                                    Text(viewModel.formatarLocalizacao(cidade: postagem.cidade, bairro: postagem.bairro))
+                                        .font(.subheadline)
+                                }
+                                .foregroundColor(.textos)
+                                .padding(.leading)
+                                .padding(.top, 10)
+                                
+                                Spacer()
+                                
+                                let categoriasComEmoji: [String: String] = [
+                                    "Favoritos": "❤️",
+                                    "Montanha": "⛰️",
+                                    "Praia": "🏖️",
+                                    "Natureza": "🍃",
+                                    "Campo": "🏕️",
+                                    "Outros": "✈️"
+                                ]
+                                
+                                let nomeCategoria = postagem.postagemCategoria?.nome ?? "Sem categoria"
+                                let emoji = categoriasComEmoji[nomeCategoria] ?? ""
+                                let categoriaFormatada = "\(nomeCategoria) \(emoji)"
+                                
+                                HStack {
+                                    Text(categoriaFormatada)
+                                        .font(.subheadline)
+                                        .foregroundStyle(.textos)
+                                        .padding(.horizontal, 12)
+                                        .padding(.vertical, 8)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 12)
+                                                .fill(Color.divisaoDetalhes.opacity(0.3))
+                                        )
+                                }
+                                .padding(.trailing)
+                                .padding(.top, 6)
                             }
-                            .foregroundColor(.white)
-                            .padding(.leading)
-                            .padding(.top, 10)
-                            
                             Text("Observações")
-                                .foregroundStyle(.white)
+                                .foregroundStyle(.textos)
                                 .bold()
                                 .padding(.leading)
                                 .padding(.top, 30)
@@ -87,76 +122,50 @@ struct SheetDetalhesPostagem: View {
                                 .frame(width: 110, height: 3)
                                 .cornerRadius(20)
                                 .padding(.horizontal)
-                                .foregroundStyle(.divisaoDetalhes)
+                                .foregroundStyle(.divisaoDetalhes.opacity(0.3))
+                                .blur(radius: 1)
                             
                             if isEditing {
                                 TextEditor(text: $notasEditadas)
-                                    .foregroundStyle(.white)
-                                    .bold()
+                                    .foregroundStyle(.textos)
                                     .cornerRadius(10)
                                     .padding(.leading, 5)
-                                    .frame(height: 100)
-                                    .background(.verdePrincipal)
+                                    .frame(height: 120)
+                                    .lineLimit(7)
+                                    .background(.verdePrincipal.opacity(0.2))
                                     .cornerRadius(10)
                                     .scrollContentBackground(.hidden)
                                     .padding(.horizontal, 15)
+                                    .onChange(of: notasEditadas) { novoTexto in
+                                        notasEditadas = limiteDeLinhas(texto: novoTexto)
+                                    }
                             } else {
                                 if let notas = postagem.notas, !notas.isEmpty {
                                     Text(notas)
-                                        .foregroundStyle(.white)
+                                        .foregroundStyle(.textos)
                                         .padding(.leading)
                                         .padding(.top, 6)
+                                        .padding(.bottom)
+                                        .lineLimit(8)
                                 } else {
                                     Text("Sem observações")
-                                        .foregroundStyle(.white)
+                                        .foregroundStyle(.textos)
                                         .padding(.leading)
                                         .padding(.top, 6)
                                 }
                             }
-
-                            Spacer()
                         }
-                    }
-                    
-                    if isEditing {
-                        HStack {
-                            Button("Cancelar") {
-                                tituloEditado = postagem.titulo ?? ""
-                                notasEditadas = postagem.notas ?? ""
-                                isEditing = false
-                            }
-                            .frame(maxWidth: .infinity, minHeight: 40)
-                            .background(.botoes)
-                            .foregroundColor(.red)
-                            .cornerRadius(10)
-                            .padding(.horizontal, 15)
-                            
-                            Spacer()
-                            
-                            Button("Salvar") {
-                                postagem.titulo = tituloEditado
-                                postagem.notas = notasEditadas
-                                viewModel.salvarContexto()
-                                isEditing = false
-                            }
-                            .frame(maxWidth: .infinity, minHeight: 40)
-                            .background(.botoes)
-                            .foregroundColor(.green)
-                            .cornerRadius(10)
-                            .padding(.horizontal, 15)
-                            .disabled(tituloEditado.isEmpty)
-                        }
-                        .padding(.bottom, 20)
                     }
                 }
-
+                
+                
                 if !isEditing {
                     VStack {
                         Button("Excluir") {
-                            showDeleteAlert = true 
+                            showDeleteAlert = true
                         }
                         .frame(maxWidth: .infinity, minHeight: 40)
-                        .background(.botoes)
+                        .background(Color.gray.opacity(0.1))
                         .foregroundColor(.red)
                         .cornerRadius(10)
                         .padding(.horizontal, 15)
@@ -164,49 +173,65 @@ struct SheetDetalhesPostagem: View {
                     }
                 }
             }
-            .background(.telaDetalhes)
-            .clipShape(RoundedRectangle(cornerRadius: 20))
-            
-            // Botões de edição e favorito
-            HStack {
-                Button(action: {
-                    isEditing.toggle()
-                }) {
-                    Image(systemName: "pencil.circle.fill")
-                        .resizable()
-                        .foregroundStyle(.botoes)
-                        .scaledToFit()
-                        .frame(width: 30, height: 30)
-                        .padding(10)
+            .background(Color.fundo)
+            .alert(isPresented: $showDeleteAlert) {
+                Alert(
+                    title: Text("Tem certeza que deseja excluir?"),
+                    message: Text("Esta ação não pode ser desfeita."),
+                    primaryButton: .destructive(Text("Excluir")) {
+                        viewModel.excluirPostagem(postagem: postagem)
+                        dismiss()
+                    },
+                    secondaryButton: .cancel(Text("Cancelar"))
+                )
+            }
+            .navigationTitle("Memória")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    if !isEditing {
+                        Button(action: {
+                            isEditing.toggle()
+                        }) {
+                            Image(systemName: "pencil")
+                                .resizable()
+                                .scaledToFit()
+                                .bold()
+                                .frame(width: 18, height: 18)
+                                .padding(10)
+                        }
+                    }
                 }
                 
-                Spacer()
-                
-                Button(action: {
-                    viewModel.toggleFavorito(postagem: postagem)
-                }) {
-                    Image(systemName: postagem.favorito ? "heart.fill" : "heart.fill")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 30, height: 30)
-                        .foregroundColor(postagem.favorito ? .verdePrincipal : .white)
-                        .padding(10)
+                if isEditing {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button("Cancelar") {
+                            tituloEditado = postagem.titulo ?? ""
+                            notasEditadas = postagem.notas ?? ""
+                            isEditing = false
+                        }
+                    }
+                    
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button("Salvar") {
+                            postagem.titulo = tituloEditado
+                            postagem.notas = notasEditadas
+                            viewModel.salvarContexto()
+                            isEditing = false
+                        }
+                        .disabled(tituloEditado.isEmpty)
+                    }
                 }
             }
         }
-        .padding(.top)
-        .padding(.horizontal)
-        .background(Color.fundo)
-        .alert(isPresented: $showDeleteAlert) {
-            Alert(
-                title: Text("Tem certeza que deseja excluir?"),
-                message: Text("Esta ação não pode ser desfeita."),
-                primaryButton: .destructive(Text("Excluir")) {
-                    viewModel.excluirPostagem(postagem: postagem)
-                    dismiss()
-                },
-                secondaryButton: .cancel()
-            )
+    }
+    
+    func limiteDeLinhas(texto: String) -> String {
+        let linhas = texto.split(separator: "\n")
+        let maxLinhas = 7
+        if linhas.count > maxLinhas {
+            return linhas.prefix(maxLinhas).joined(separator: "\n")
         }
+        return texto
     }
 }
