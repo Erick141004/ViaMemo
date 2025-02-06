@@ -12,6 +12,7 @@
 		42573E7C2D4D4E2800A34AF0 /* SheetDesejo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42573E7B2D4D4E2800A34AF0 /* SheetDesejo.swift */; };
 		42573E7E2D4D6C5F00A34AF0 /* TelaDesejosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42573E7D2D4D6C5F00A34AF0 /* TelaDesejosView.swift */; };
 		42573E802D4D71C600A34AF0 /* TelaDesejosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42573E7F2D4D71C600A34AF0 /* TelaDesejosViewModel.swift */; };
+		7F5874E12D554C8B00877E92 /* Schoolbell-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F5874E02D554C8B00877E92 /* Schoolbell-Regular.ttf */; };
 		7F6D7F752D52834D00C34A6B /* SheetPostagem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6D7F742D52834D00C34A6B /* SheetPostagem.swift */; };
 		7F6D7F772D52836800C34A6B /* CardPostagem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6D7F762D52836800C34A6B /* CardPostagem.swift */; };
 		7F6D7F792D5283A000C34A6B /* TelaPostagem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6D7F782D5283A000C34A6B /* TelaPostagem.swift */; };
@@ -37,6 +38,7 @@
 		42573E7D2D4D6C5F00A34AF0 /* TelaDesejosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaDesejosView.swift; sourceTree = "<group>"; };
 		42573E7F2D4D71C600A34AF0 /* TelaDesejosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaDesejosViewModel.swift; sourceTree = "<group>"; };
 		4285B31D2D53FD96002DE21D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		7F5874E02D554C8B00877E92 /* Schoolbell-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Schoolbell-Regular.ttf"; sourceTree = "<group>"; };
 		7F6D7F742D52834D00C34A6B /* SheetPostagem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetPostagem.swift; sourceTree = "<group>"; };
 		7F6D7F762D52836800C34A6B /* CardPostagem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPostagem.swift; sourceTree = "<group>"; };
 		7F6D7F782D5283A000C34A6B /* TelaPostagem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaPostagem.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 		AB81ABE52D4C16E90021D7E6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7F5874E02D554C8B00877E92 /* Schoolbell-Regular.ttf */,
 				AB81ABD42D4BEEB60021D7E6 /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -252,6 +255,7 @@
 			files = (
 				AB81ABD82D4BEEB60021D7E6 /* Preview Assets.xcassets in Resources */,
 				AB81ABD52D4BEEB60021D7E6 /* Assets.xcassets in Resources */,
+				7F5874E12D554C8B00877E92 /* Schoolbell-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

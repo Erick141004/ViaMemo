@@ -50,8 +50,8 @@ struct InfosIniciais: View {
     var body: some View {
         VStack(alignment: .center, spacing: 30) {
             Text("ViaMemo")
-                .font(.system(size: 35))
-                .padding(.top, 28)
+                .font(.custom("Schoolbell-Regular", size: 50))
+                .padding(.top, 10)
 
             Text("Todas as suas viagens em um só lugar")
                 .font(.system(size: 26, design: .serif))
@@ -71,10 +71,6 @@ struct InfosIniciais: View {
                 .background(Color("verdeBotao"))
                 .clipShape(RoundedRectangle(cornerRadius: 50))
             }
-
-            Text("Ao continuar, você aceita nossos Termos de Uso e Política de Privacidade.")
-                .font(.system(size: 15))
-                .multilineTextAlignment(.center)
         }
         .padding(.horizontal, 30)
         .frame(minWidth: 400, minHeight: 400)
