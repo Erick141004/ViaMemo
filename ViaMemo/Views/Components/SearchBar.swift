@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import CoreData
 
 struct SearchBar: View {
     @Binding var textoPesquisa: String

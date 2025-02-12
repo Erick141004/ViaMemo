@@ -51,7 +51,9 @@ struct TelaPostagem: View {
                         )
                     }
                 }
+                
                 .padding(.horizontal)
+                
             }
             .padding(.bottom, 5)
             
@@ -82,11 +84,13 @@ struct TelaPostagem: View {
                                     postagemSelecionada = postagem
                                     print(postagem)
                                 }
+                                
                         }
                     }
                     .padding(.horizontal)
                     .padding(.bottom, 20)
                 }
+                
             }
         }
         .background(Color.fundo)
