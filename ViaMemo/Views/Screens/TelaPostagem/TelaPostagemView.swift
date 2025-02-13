@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct TelaPostagem: View {
-    @ObservedObject var viewModel: PostagemViewModel
+    @StateObject var viewModel: PostagemViewModel
     @State private var mostrarSheet = false
-    @State private var postagemSelecionada: Postagem?
+    @State private var postagemSelecionada: PostagemSwiftData?
     @State private var procurar: String = ""
     @StateObject private var categoriaViewModel = BotaoCategoriaViewModel()
     @State private var categoriaSelecionada: String = ""

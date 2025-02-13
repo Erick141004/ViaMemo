@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SheetDetalhesPostagem: View {
-    let postagem: Postagem
+    let postagem: PostagemSwiftData
     @ObservedObject var viewModel: PostagemViewModel
     
     @State private var isEditing: Bool = false
@@ -18,11 +18,11 @@ struct SheetDetalhesPostagem: View {
     
     @Environment(\.dismiss) var dismiss
     
-    init(postagem: Postagem, viewModel: PostagemViewModel) {
+    init(postagem: PostagemSwiftData, viewModel: PostagemViewModel) {
         self.postagem = postagem
         self.viewModel = viewModel
-        _tituloEditado = State(initialValue: postagem.titulo ?? "")
-        _notasEditadas = State(initialValue: postagem.notas ?? "")
+        _tituloEditado = State(initialValue: postagem.titulo )
+        _notasEditadas = State(initialValue: postagem.notas )
     }
     
     
@@ -31,7 +31,7 @@ struct SheetDetalhesPostagem: View {
         NavigationView {
             VStack(alignment: .leading) {
                 ScrollView {
-                    if let imageData = postagem.imagem, let uiImage = UIImage(data: imageData) {
+                    if let uiImage = UIImage(data: postagem.imagem) {
                         Image(uiImage: uiImage)
                             .resizable()
                             .scaledToFill()
@@ -57,7 +57,7 @@ struct SheetDetalhesPostagem: View {
                                     .padding(.top)
                                 
                             } else {
-                                Text(postagem.titulo ?? "Sem título")
+                                Text(postagem.titulo )
                                     .font(.title)
                                     .foregroundStyle(.textos)
                                     .bold()
@@ -140,8 +140,8 @@ struct SheetDetalhesPostagem: View {
                                         notasEditadas = limiteDeLinhas(texto: novoTexto)
                                     }
                             } else {
-                                if let notas = postagem.notas, !notas.isEmpty {
-                                    Text(notas)
+                                if !postagem.notas.isEmpty {
+                                    Text(postagem.notas)
                                         .foregroundStyle(.textos)
                                         .padding(.leading)
                                         .padding(.top, 6)
@@ -206,8 +206,8 @@ struct SheetDetalhesPostagem: View {
                 if isEditing {
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button("Cancelar") {
-                            tituloEditado = postagem.titulo ?? ""
-                            notasEditadas = postagem.notas ?? ""
+                            tituloEditado = postagem.titulo 
+                            notasEditadas = postagem.notas 
                             isEditing = false
                         }
                     }

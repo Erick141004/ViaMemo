@@ -10,7 +10,7 @@ import SwiftData
 
 struct TabBar: View {
     @Environment(\.modelContext) private var modelContext
-    @ObservedObject private var postagemViewModel = PostagemViewModel()
+    @State private var postagemViewModel: PostagemViewModel?
     
     @State private var desejoViewModel: TelaDesejosViewModel?
 
@@ -19,7 +19,12 @@ struct TabBar: View {
     var body: some View {
         TabView(selection: $tabSelecionado) {
             NavigationStack {
-                TelaPostagem(viewModel: postagemViewModel)
+                if let postagemViewModel {
+                    TelaPostagem(viewModel: postagemViewModel)
+                } else {
+                    ProgressView()
+                }
+                
             }
             .tabItem {
                 Text("Memórias")
@@ -49,6 +54,10 @@ struct TabBar: View {
         .onAppear {
             if desejoViewModel == nil {
                 desejoViewModel = TelaDesejosViewModel(modelContext: modelContext)
+            }
+            
+            if postagemViewModel == nil {
+                postagemViewModel = PostagemViewModel(modelContext: modelContext)
             }
         }
     }

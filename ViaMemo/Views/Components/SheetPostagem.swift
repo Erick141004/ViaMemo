@@ -79,7 +79,7 @@ struct SheetPostagem: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Salvar") {
-                        viewModel.adicionarPostagem(categoria: categoriaSelecionada)
+                        viewModel.adicionarPostagem(categoria: categoriaViewModel.extrairCategoria(categoria: categoriaSelecionada))
                         limparCampos()
                         dismiss()
                     }

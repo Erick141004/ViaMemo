@@ -20,7 +20,7 @@ import SwiftData
     var titulo: String
     var postagemCategoria: CategoriaSwiftData?
     
-    init(bairro: String, cidade: String, data: String, favorito: Bool, imagem: Data, notas: String, titulo: String, postagemCategoria: CategoriaSwiftData?) {
+    init(bairro: String, cidade: String, data: String, favorito: Bool, imagem: Data, notas: String, titulo: String, postagemCategoria: CategoriaSwiftData? = nil) {
         self.bairro = bairro
         self.cidade = cidade
         self.data = data

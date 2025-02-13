@@ -10,9 +10,10 @@ import CoreData
 import PhotosUI
 import CoreLocation
 import UIKit
+import SwiftData
 
 class PostagemViewModel: NSObject, ObservableObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CLLocationManagerDelegate {
-    @Published var postagens: [Postagem] = []
+    @Published var postagens: [PostagemSwiftData] = []
     @Published var imagemSelecionadaItem: PhotosPickerItem?
     @Published var imagemSelecionada: UIImage?
     @Published var titulo: String = ""
@@ -22,17 +23,15 @@ class PostagemViewModel: NSObject, ObservableObject, UINavigationControllerDeleg
     @Published var bairro: String = ""
     @Published var textoProcura: String = ""
     @Published var buscaAtiva: Bool = false
-    @Published var categoriaSelecionada: Categoria?
+    @Published var categoriaSelecionada: CategoriaSwiftData?
     @Published var favoritoSelecionado: Bool = false
     
-    private let container: NSPersistentContainer
-    private let context: NSManagedObjectContext
+    var modelContext: ModelContext
     private let localGerenciador = CLLocationManager()
     private var localAtual: CLLocation?
     
-    override init() {
-        self.container = PersistenceController.shared.container
-        self.context = container.viewContext
+    init(modelContext: ModelContext) {
+        self.modelContext = modelContext
         super.init()
         self.localGerenciador.delegate = self
         self.localGerenciador.requestWhenInUseAuthorization()
@@ -46,65 +45,75 @@ class PostagemViewModel: NSObject, ObservableObject, UINavigationControllerDeleg
         }
     }
     
+    func filtrarPorCategoria(nome: String) -> CategoriaSwiftData?{
+            let categoriaEscolhida = FetchDescriptor<CategoriaSwiftData>(predicate: #Predicate{$0.nome == nome})
+            
+            do {
+                let categoria = try modelContext.fetch(categoriaEscolhida)
+                categoriaSelecionada = categoria.first
+                return categoriaSelecionada
+            }
+            catch {
+                print("Erro ao buscar uma categoria: \(error)")
+                return nil
+            }
+        }
+    
     func fetchPostagens() {
-        let request: NSFetchRequest<Postagem> = Postagem.fetchRequest()
-        var predicates = [NSPredicate]()
-        
-        if !textoProcura.isEmpty {
-            predicates.append(NSPredicate(
-                format: "titulo CONTAINS[cd] %@ OR bairro CONTAINS[cd] %@ OR cidade CONTAINS[cd] %@",
-                textoProcura, textoProcura, textoProcura
-            ))
-        }
-        
-        if let categoria = categoriaSelecionada {
-            predicates.append(NSPredicate(format: "ANY postagemCategoria == %@", categoria))
-        }
-        
-        if favoritoSelecionado {
-            predicates.append(NSPredicate(format: "favorito == YES"))
-        }
-        
-        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
-        
         do {
-            postagens = try context.fetch(request)
+            let request = FetchDescriptor<PostagemSwiftData>(
+                sortBy: [SortDescriptor(\.titulo)]
+            )
+            
+            var resultados = try modelContext.fetch(request)
+
+            if !textoProcura.isEmpty {
+                resultados = resultados.filter { postagem in
+                    postagem.titulo.localizedCaseInsensitiveContains(textoProcura) ||
+                    postagem.bairro.localizedCaseInsensitiveContains(textoProcura) ||
+                    postagem.cidade.localizedCaseInsensitiveContains(textoProcura)
+                }
+            }
+            
+            if let categoria = categoriaSelecionada {
+                resultados = resultados.filter { postagem in
+                    postagem.postagemCategoria?.id == categoria.id
+                }
+            }
+            
+            if favoritoSelecionado {
+                resultados = resultados.filter { postagem in
+                    postagem.favorito == true
+                }
+            }
+
+            postagens = resultados
+
         } catch {
-            print("Erro ao buscar postagens: \(error)")
+            print("Erro ao buscar desejos: \(error)")
         }
     }
     
     func adicionarPostagem(categoria: String) {
-        let novaPostagem = Postagem(context: context)
-        novaPostagem.id = UUID()
-        novaPostagem.titulo = titulo
-        novaPostagem.notas = notas
-        novaPostagem.cidade = cidade
-        novaPostagem.bairro = bairro
-        novaPostagem.data = data
-        novaPostagem.favorito = false
-        novaPostagem.postagemCategoria = filtrarPorCategoria(nome: categoria)
+        let imagemData = imagemSelecionada?.jpegData(compressionQuality: 0.8)
+        let catego = filtrarPorCategoria(nome: categoria)
+                
+        let newPostagem = PostagemSwiftData(
+            bairro: self.bairro,
+            cidade: self.cidade,
+            data: self.data,
+            favorito: false,
+            imagem: imagemData!,
+            notas: self.notas,
+            titulo: self.titulo,
+            postagemCategoria: catego)
         
-        if let imagemData = imagemSelecionada?.jpegData(compressionQuality: 0.8) {
-            novaPostagem.imagem = imagemData
-        }
-        
+        modelContext.insert(newPostagem)
         salvarContexto()
-        imagemSelecionada = nil
-        imagemSelecionadaItem = nil
-    }
-    
-    func filtrarPorCategoria(nome: String) -> Categoria? {
-        let request: NSFetchRequest<Categoria> = Categoria.fetchRequest()
-        request.predicate = NSPredicate(format: "nome == %@", nome)
         
-        do {
-            let categorias = try context.fetch(request)
-            return categorias.first
-        } catch {
-            print("Erro ao buscar categoria: \(error)")
-        }
-        return nil
+        self.categoriaSelecionada = nil
+        self.imagemSelecionada = nil
+        self.imagemSelecionadaItem = nil
     }
     
     func formatarLocalizacao(cidade: String?, bairro: String?) -> String {
@@ -129,7 +138,7 @@ class PostagemViewModel: NSObject, ObservableObject, UINavigationControllerDeleg
     
     func salvarContexto() {
         do {
-            try context.save()
+            try modelContext.save()
             fetchPostagens()
         } catch {
             print("Erro ao salvar contexto: \(error)")
@@ -149,15 +158,15 @@ class PostagemViewModel: NSObject, ObservableObject, UINavigationControllerDeleg
         }
     }
     
-    func atualizarPostagem(postagem: Postagem, titulo: String, notas: String) {
+    func atualizarPostagem(postagem: PostagemSwiftData, titulo: String, notas: String) {
         postagem.titulo = titulo
         postagem.notas = notas
         salvarContexto()
     }
     
-    func excluirPostagem(postagem: Postagem) {
-        context.delete(postagem)
-        salvarContexto()
+    func excluirPostagem(postagem: PostagemSwiftData) {
+       modelContext.delete(postagem)
+       salvarContexto()
     }
 
     
@@ -192,41 +201,8 @@ class PostagemViewModel: NSObject, ObservableObject, UINavigationControllerDeleg
         }
     }
     
-    func toggleFavorito(postagem: Postagem) {
+    func toggleFavorito(postagem: PostagemSwiftData) {
         postagem.favorito.toggle()
         salvarContexto()
-    }
-}
-
-extension PersistenceController {
-    func criarCategoriasPadrao() {
-        let context = container.viewContext
-
-        let categoriasPadrao = [
-            "Favoritos",
-            "Montanha",
-            "Praia",
-            "Natureza",
-            "Campo",
-            "Outros"
-        ]
-
-        let request: NSFetchRequest<Categoria> = Categoria.fetchRequest()
-
-        do {
-            let count = try context.count(for: request)
-
-            if count == 0 {
-                for nome in categoriasPadrao {
-                    let novaCategoria = Categoria(context: context)
-                    novaCategoria.nome = nome
-                }
-
-                try context.save()
-                print("Categorias padrão criadas!")
-            }
-        } catch {
-            print("Erro ao criar categorias padrão: \(error)")
-        }
     }
 }

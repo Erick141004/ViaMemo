@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct CardPostagem: View {
-    let postagem: Postagem
+    let postagem: PostagemSwiftData
     @ObservedObject var viewModel: PostagemViewModel
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
             VStack(alignment: .leading) {
-                if let imageData = postagem.imagem, let uiImage = UIImage(data: imageData) {
+                if let uiImage = UIImage(data: postagem.imagem) {
                     Image(uiImage: uiImage)
                         .resizable()
                         .scaledToFill()
@@ -25,21 +25,21 @@ struct CardPostagem: View {
                 }
                 
                 VStack(alignment: .leading) {
-                    Text(postagem.titulo ?? "Sem título")
+                    Text(postagem.titulo )
                         .lineLimit(1)
                         .padding(.bottom, 1)
                         .font(.headline)
                         .foregroundStyle(.white)
                         .bold()
                     
-                    Text(postagem.data ?? "Sem data")
+                    Text(postagem.data )
                         .foregroundStyle(.white)
                         .font(.caption)
                         .lineLimit(2)
                     
                     HStack {
                         Image(systemName: "mappin.and.ellipse")
-                        Text(viewModel.formatarLocalizacao(cidade: postagem.cidade ?? "", bairro: postagem.bairro ?? ""))
+                        Text(viewModel.formatarLocalizacao(cidade: postagem.cidade , bairro: postagem.bairro ))
                             .lineLimit(1)
                     }
                     .font(.caption2)
