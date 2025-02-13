@@ -42,6 +42,6 @@ struct CardDesejo: View {
             }
             .frame(width: responsivo.size.width, alignment: .center)
         }
-        .frame(height: 100)
+        .frame(height: 90)
     }
 }
