@@ -6,23 +6,22 @@
 //
 
 import SwiftUI
-import CoreData
+import SwiftData
 
 class TelaDesejosViewModel: ObservableObject {
-    @Published var desejos: [ListaDesejos] = []
+    @Published var desejos: [ListaDesejosSwiftData] = []
     @Published var titulo: String = ""
     @Published var local: String = ""
-    private let contexto: NSManagedObjectContext
-    private let container: NSPersistentContainer
     
     @Published var textoProcura: String = ""
     @Published var buscaAtiva: Bool = false
     
-    @Published var categoriaSelecionada: Categoria?
+    @Published var categoriaSelecionada: CategoriaSwiftData?
     
-    init() {
-        self.container = PersistenceController.shared.container
-        self.contexto = container.viewContext
+    private var modelContext: ModelContext
+    
+    init(modelContext: ModelContext) {
+        self.modelContext = modelContext
         fetchDesejos()
     }
     
@@ -38,7 +37,7 @@ class TelaDesejosViewModel: ObservableObject {
             return "desertoImagem"
         case "mochilao":
             return "mochilaoImagem"
-        case "natureza":
+        case "floresta":
             return "naturezaImagem"
         case "campo":
             return "campoImagem"
@@ -48,13 +47,12 @@ class TelaDesejosViewModel: ObservableObject {
             return "outros"
         }
     }
-
-    func filtrarPorCategoria(nome: String) -> Categoria?{
-        let request: NSFetchRequest<Categoria> = Categoria.fetchRequest()
-        request.predicate = NSPredicate(format: "nome == %@", nome)
+    
+    func filtrarPorCategoria(nome: String) -> CategoriaSwiftData?{
+        let request = FetchDescriptor<CategoriaSwiftData>(predicate: #Predicate { $0.nome == nome })
         
         do {
-            let categorias = try contexto.fetch(request)
+            let categorias = try modelContext.fetch(request)
             categoriaSelecionada = categorias.first
             return categoriaSelecionada
         } catch {
@@ -65,53 +63,104 @@ class TelaDesejosViewModel: ObservableObject {
     }
     
     func fetchDesejos() {
-        let request: NSFetchRequest<ListaDesejos> = ListaDesejos.fetchRequest()
-        var predicates = [NSPredicate]()
-        
-        if !textoProcura.isEmpty {
-            predicates.append(NSPredicate(
-                format: "titulo CONTAINS[cd] %@ OR local CONTAINS[cd] %@",
-                textoProcura, textoProcura
-            ))
-        }
-        
-        if let categoria = categoriaSelecionada {
-            predicates.append(NSPredicate(format: "ANY desejoCategoria == %@", categoria))
-        }
-        
-        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
-        
         do {
-            desejos = try contexto.fetch(request)
+            let request = FetchDescriptor<ListaDesejosSwiftData>(
+                sortBy: [SortDescriptor(\.titulo)]
+            )
+            
+            var resultados = try modelContext.fetch(request)
+
+            if !textoProcura.isEmpty {
+                resultados = resultados.filter { desejo in
+                    desejo.titulo.localizedCaseInsensitiveContains(textoProcura) ||
+                    desejo.local.localizedCaseInsensitiveContains(textoProcura)
+                }
+            }
+            
+            if let categoria = categoriaSelecionada {
+                resultados = resultados.filter { desejo in
+                    desejo.desejoCategoria?.id == categoria.id
+                }
+            }
+
+            desejos = resultados
+
         } catch {
-            print("Erro ao buscar postagens: \(error)")
+            print("Erro ao buscar desejos: \(error)")
         }
     }
+
+
+
+
     
+//    func fetchDesejos() {
+////        var predicates: [Predicate<ListaDesejosSwiftData>] = []
+////
+////        if !textoProcura.isEmpty {
+////            predicates.append { desejo in
+////                desejo.titulo.localizedCaseInsensitiveContains(textoProcura) ||
+////                desejo.local.localizedCaseInsensitiveContains(textoProcura)
+////            }
+////        }
+////
+////        if let categoria = categoriaSelecionada {
+////            predicates.append { desejo in desejo.desejoCategoria?.id == categoria.id }
+////        }
+//
+//        let request = FetchDescriptor<ListaDesejosSwiftData>()
+//
+//        do {
+//            let resultados = try modelContext.fetch(request)
+//            desejos = resultados
+//        } catch {
+//            print("Erro ao buscar desejos: \(error)")
+//        }
+//
+//    }
+    
+//    func fetchDesejos() {
+//        do {
+//            // Criando o predicado para filtrar apenas por categoria
+//            let predicate = #Predicate<ListaDesejosSwiftData> { desejo in
+//                // Verifica se a categoria está selecionada e se corresponde à categoria do desejo
+//                guard let categoriaSelecionada = self.categoriaSelecionada else {
+//                    // Se não houver categoria selecionada, retorna todos os desejos
+//                    return true
+//                }
+//
+//                // Se a categoria estiver selecionada, verifica se ela corresponde à categoria do desejo
+//                return desejo.desejoCategoria?.nome == categoriaSelecionada.nome
+//            }
+//
+//            // Configuração do FetchDescriptor com o predicado
+//            let descriptor = FetchDescriptor<ListaDesejosSwiftData>(
+//                predicate: predicate,
+//                sortBy: [SortDescriptor(\.titulo)]  // Você pode mudar a ordem de classificação se necessário
+//            )
+//
+//            // Realiza a busca
+//            desejos = try modelContext.fetch(descriptor)
+//
+//        } catch {
+//            print("Erro ao buscar desejos: \(error)")
+//        }
+//    }
+
+
     func adicionarDesejo(titulo: String, local: String, categoria: String) {
-        let novoDesejo = ListaDesejos(context: contexto)
-        novoDesejo.local = local
-        novoDesejo.titulo = titulo
-        novoDesejo.desejoCategoria = filtrarPorCategoria(nome: categoria)
+        let novaCategoria = filtrarPorCategoria(nome: categoria)
+        let novoDesejo = ListaDesejosSwiftData(titulo: titulo, local: local, desejoCategoria: novaCategoria)
         
-        categoriaSelecionada = nil
-        salvarContexto()
+        modelContext.insert(novoDesejo)
+        try? modelContext.save()
+        fetchDesejos()
     }
     
     func deletarDesejo(at offsets: IndexSet) {
-        offsets.forEach { index in
-            let desejo = desejos[index]
-            contexto.delete(desejo)
+        for index in offsets {
+            modelContext.delete(desejos[index])
         }
-        salvarContexto()
-    }
-    
-    func salvarContexto() {
-        do {
-            try contexto.save()
-            fetchDesejos()
-        } catch {
-            print("Erro ao salvar o contexto: \(error)")
-        }
+        fetchDesejos()
     }
 }

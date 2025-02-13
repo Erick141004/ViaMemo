@@ -61,12 +61,4 @@ struct SheetDesejo: View {
           
         }
     }
-    
-}
-
-
-#Preview {
-    var vm = TelaDesejosViewModel()
-    
-    return SheetDesejo(viewModel: vm)
 }

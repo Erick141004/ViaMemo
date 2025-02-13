@@ -6,16 +6,18 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct TabBar: View {
-    @ObservedObject private var postagemViewModel = TelaPostagemViewModel()
-    @ObservedObject private var desejoViewModel = TelaDesejosViewModel()
+    @Environment(\.modelContext) private var modelContext
+    @ObservedObject private var postagemViewModel = PostagemViewModel()
     
+    @State private var desejoViewModel: TelaDesejosViewModel?
+
     @State var tabSelecionado = 1
-    
+
     var body: some View {
-        TabView(selection: $tabSelecionado,
-                content:  {
+        TabView(selection: $tabSelecionado) {
             NavigationStack {
                 TelaPostagem(viewModel: postagemViewModel)
             }
@@ -23,18 +25,35 @@ struct TabBar: View {
                 Text("Memórias")
                 Image(tabSelecionado == 1 ? "memoriaSelecionado" : "memoria")
             }.tag(1)
-            
+
             NavigationStack {
-                TelaDesejosView(viewModel: desejoViewModel)
+                if let desejoViewModel {
+                    TelaDesejosView(viewModel: desejoViewModel)
+                } else {
+                    ProgressView() // Para evitar crashes enquanto o ViewModel é criado
+                }
             }
             .tabItem {
                 Text("Desejos")
                 Image(tabSelecionado == 2 ? "desejoSelecionado" : "desejo")
             }.tag(2)
             
-        })
+            NavigationStack {
+                TelaSobreView()
+            }
+            .tabItem {
+                Text("Sobre")
+                Image(tabSelecionado == 3 ? "sobreSelecionado" : "sobre")
+            }.tag(3)
+        }
+        .onAppear {
+            if desejoViewModel == nil {
+                desejoViewModel = TelaDesejosViewModel(modelContext: modelContext)
+            }
+        }
     }
 }
+
 
 #Preview {
     TabBar()

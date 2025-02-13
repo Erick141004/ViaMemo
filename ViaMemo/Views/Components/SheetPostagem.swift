@@ -9,24 +9,24 @@ import SwiftUI
 import PhotosUI
 
 struct SheetPostagem: View {
-    @ObservedObject var viewModel: TelaPostagemViewModel
+    @ObservedObject var viewModel: PostagemViewModel
     @Environment(\.dismiss) var dismiss
-    @State var categoriaSelecionada: String = "Montanha ⛰️"
-    @StateObject var categoriaViewModel = BotaoCategoriaViewModel()
+    @State private var categoriaSelecionada: String = "Montanha ⛰️"
+    @StateObject private var categoriaViewModel = BotaoCategoriaViewModel()
+    @State private var abrirCamera = false
     
     private var podeSalvar: Bool {
-        return viewModel.imagemSelecionada != nil && !viewModel.titulo.isEmpty
+        !viewModel.titulo.isEmpty && viewModel.imagemSelecionada != nil
     }
     
     var body: some View {
         NavigationView {
             Form {
                 Section(header: Text("Imagem")) {
-                    PhotosPicker(selection: $viewModel.imagemSelecionadaItem, matching: .images, photoLibrary: .shared()) {
+                    PhotosPicker(selection: $viewModel.imagemSelecionadaItem, matching: .images) {
                         Text("Selecionar Imagem")
-                            .foregroundColor(.blue)
                     }
-                    .onChange(of: viewModel.imagemSelecionadaItem) { item in
+                    .onChange(of: viewModel.imagemSelecionadaItem) { _ in
                         viewModel.selecionarImagem()
                     }
                     
@@ -35,8 +35,12 @@ struct SheetPostagem: View {
                             .resizable()
                             .scaledToFit()
                             .frame(height: 200)
-                            .padding(.top)
                     }
+                    
+                    Button("Tirar Foto") { abrirCamera = true }
+                        .sheet(isPresented: $abrirCamera) {
+                            CameraView(imagem: $viewModel.imagemSelecionada, cidade: $viewModel.cidade, bairro: $viewModel.bairro, data: $viewModel.data)
+                        }
                 }
                 
                 Section(header: Text("Informações da Memória")) {
@@ -50,11 +54,9 @@ struct SheetPostagem: View {
                         .lineLimit(5)
                 }
                 
-                Section(header: Text("Categoria")){
-                    Picker("Categoria",selection: $categoriaSelecionada){
-                        ForEach(categoriaViewModel.nomeCategoria, id: \.self) {
-                            Text($0)
-                        }
+                Section(header: Text("Categoria")) {
+                    Picker("Categoria", selection: $categoriaSelecionada) {
+                        ForEach(categoriaViewModel.nomeCategoria, id: \.self) { Text($0) }
                     }
                 }
                 
@@ -65,10 +67,8 @@ struct SheetPostagem: View {
                 if !(viewModel.cidade.isEmpty && viewModel.bairro.isEmpty) {
                     Text("Localização: \(viewModel.formatarLocalizacao(cidade: viewModel.cidade, bairro: viewModel.bairro))")
                 }
-                
             }
             .navigationTitle("Nova Postagem")
-            .listStyle(.insetGrouped)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Cancelar") {
@@ -79,7 +79,7 @@ struct SheetPostagem: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Salvar") {
-                        viewModel.adicionarPostagem(categoria: categoriaViewModel.extrairCategoria(categoria: categoriaSelecionada))
+                        viewModel.adicionarPostagem(categoria: categoriaSelecionada)
                         limparCampos()
                         dismiss()
                     }
@@ -97,11 +97,4 @@ struct SheetPostagem: View {
         viewModel.data = ""
         categoriaSelecionada = ""
     }
-    
-}
-
-#Preview {
-    var vm = TelaPostagemViewModel()
-    
-    return SheetPostagem(viewModel: vm)
 }

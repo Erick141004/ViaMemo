@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CardPostagem: View {
     let postagem: Postagem
-    @ObservedObject var viewModel: TelaPostagemViewModel
+    @ObservedObject var viewModel: PostagemViewModel
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
@@ -30,7 +30,7 @@ struct CardPostagem: View {
                         .padding(.bottom, 1)
                         .font(.headline)
                         .foregroundStyle(.white)
-                        .bold() 
+                        .bold()
                     
                     Text(postagem.data ?? "Sem data")
                         .foregroundStyle(.white)
@@ -39,7 +39,7 @@ struct CardPostagem: View {
                     
                     HStack {
                         Image(systemName: "mappin.and.ellipse")
-                        Text(viewModel.formatarLocalizacao(cidade: postagem.cidade, bairro: postagem.bairro))
+                        Text(viewModel.formatarLocalizacao(cidade: postagem.cidade ?? "", bairro: postagem.bairro ?? ""))
                             .lineLimit(1)
                     }
                     .font(.caption2)
@@ -53,7 +53,7 @@ struct CardPostagem: View {
             .background(Color.verdePrincipal)
             .cornerRadius(12)
             .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
-
+            
             Button(action: {
                 viewModel.toggleFavorito(postagem: postagem)
             }) {

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TelaPostagem: View {
-    @ObservedObject var viewModel: TelaPostagemViewModel
+    @ObservedObject var viewModel: PostagemViewModel
     @State private var mostrarSheet = false
     @State private var postagemSelecionada: Postagem?
     @State private var procurar: String = ""
@@ -60,10 +60,10 @@ struct TelaPostagem: View {
                     ContentUnavailableView.search(text: viewModel.textoProcura)
                 } else {
                     ContentUnavailableView{
-                        Label("Nenhuma postagem", image: "coqueiro")
+                        Label("Nenhuma memória", image: "coqueiro")
                     }
                     description: {
-                        Text("Comece criando a sua primeira postagem!")
+                        Text("Comece criando a sua primeira memória!")
                     }
                 }
             }

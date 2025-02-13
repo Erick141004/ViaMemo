@@ -8,5 +8,17 @@
 	<array>
 		<string>Schoolbell-Regular.ttf</string>
 	</array>
+    
+    <key>NSCameraUsageDescription</key>
+    <string>Precisamos acessar sua câmera para capturar fotos.</string>
+
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Precisamos da sua localização para registrar onde a foto foi tirada.</string>
+
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>Precisamos salvar a foto na galeria.</string>
+
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Precisamos acessar sua galeria para selecionar fotos.</string>
 </dict>
 </plist>

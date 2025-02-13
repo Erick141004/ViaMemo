@@ -6,14 +6,16 @@
 //
 
 import SwiftUI
-import CoreData
+import SwiftData
 
 struct TelaDesejosView: View {
-    @ObservedObject var viewModel: TelaDesejosViewModel
+    @StateObject var viewModel: TelaDesejosViewModel
     @State var mostrarSheet = false
     @StateObject var categoriaViewModel = BotaoCategoriaViewModel()
     @State private var procurar: String = ""
     @State private var categoriaSelecionada: String = ""
+    
+    //@Query private var desejos: [ListaDesejosSwiftData]
     
     var body: some View {
         VStack{
@@ -46,16 +48,11 @@ struct TelaDesejosView: View {
                 .padding(.horizontal)
             }
             
-            if (viewModel.desejos.isEmpty){
-                if (viewModel.buscaAtiva){
-                    ContentUnavailableView.search(text: viewModel.textoProcura)
-                } else{
-                    ContentUnavailableView{
-                        Label("Nenhuma postagem", image: "coqueiro")
-                    }
-                    description: {
-                        Text("Crie os seus lugares mais desejados!")
-                    }
+            if viewModel.desejos.isEmpty {
+                ContentUnavailableView {
+                    Label("Nenhum desejo", image: "coqueiro")
+                } description: {
+                    Text("Comece criando seu primeiro desejo!")
                 }
             }
             else {

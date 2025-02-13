@@ -7,16 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4253141B2D5554FD005B1C05 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4253141A2D5554FD005B1C05 /* CameraView.swift */; };
 		42573E782D4D3F0500A34AF0 /* CardDesejo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42573E772D4D3F0500A34AF0 /* CardDesejo.swift */; };
 		42573E7A2D4D4AD000A34AF0 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42573E792D4D4AD000A34AF0 /* TabBar.swift */; };
 		42573E7C2D4D4E2800A34AF0 /* SheetDesejo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42573E7B2D4D4E2800A34AF0 /* SheetDesejo.swift */; };
 		42573E7E2D4D6C5F00A34AF0 /* TelaDesejosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42573E7D2D4D6C5F00A34AF0 /* TelaDesejosView.swift */; };
 		42573E802D4D71C600A34AF0 /* TelaDesejosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42573E7F2D4D71C600A34AF0 /* TelaDesejosViewModel.swift */; };
+		7F29477B2D5E81B40010C079 /* TelaSobreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F29477A2D5E81B40010C079 /* TelaSobreView.swift */; };
 		7F5874E12D554C8B00877E92 /* Schoolbell-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F5874E02D554C8B00877E92 /* Schoolbell-Regular.ttf */; };
 		7F6D7F752D52834D00C34A6B /* SheetPostagem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6D7F742D52834D00C34A6B /* SheetPostagem.swift */; };
 		7F6D7F772D52836800C34A6B /* CardPostagem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6D7F762D52836800C34A6B /* CardPostagem.swift */; };
-		7F6D7F792D5283A000C34A6B /* TelaPostagem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6D7F782D5283A000C34A6B /* TelaPostagem.swift */; };
-		7FE875D82D5282A100917F43 /* TelaPostagemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE875D72D5282A100917F43 /* TelaPostagemViewModel.swift */; };
+		7F6D7F792D5283A000C34A6B /* TelaPostagemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6D7F782D5283A000C34A6B /* TelaPostagemView.swift */; };
+		7FB3F6CF2D5E69A400781244 /* PostagemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB3F6CE2D5E69A400781244 /* PostagemViewModel.swift */; };
+		7FB3F6D32D5E787B00781244 /* Categoria.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB3F6D02D5E787B00781244 /* Categoria.swift */; };
+		7FB3F6D42D5E787B00781244 /* ListaDesejos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB3F6D12D5E787B00781244 /* ListaDesejos.swift */; };
+		7FB3F6D52D5E787B00781244 /* Postagem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB3F6D22D5E787B00781244 /* Postagem.swift */; };
 		7FEC354A2D53FDDF0096697D /* SheetDetalhesPostagem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FEC35492D53FDDF0096697D /* SheetDetalhesPostagem.swift */; };
 		AB5BFE242D4D646B006D4EED /* BotaoCategoria.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5BFE232D4D646B006D4EED /* BotaoCategoria.swift */; };
 		AB65006D2D52831200F38C34 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB65006C2D52831200F38C34 /* SearchBar.swift */; };
@@ -28,21 +33,26 @@
 		AB81ABDD2D4BEEB60021D7E6 /* ViaMemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AB81ABDB2D4BEEB60021D7E6 /* ViaMemo.xcdatamodeld */; };
 		AB81ABEB2D4C1F3E0021D7E6 /* SwiftData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB81ABEA2D4C1F3E0021D7E6 /* SwiftData.swift */; };
 		AB81ABEF2D4C1F6A0021D7E6 /* CardInicial.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB81ABEE2D4C1F6A0021D7E6 /* CardInicial.swift */; };
-		AB81ABF32D4C1F900021D7E6 /* TelaInicial.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB81ABF22D4C1F900021D7E6 /* TelaInicial.swift */; };
+		AB81ABF32D4C1F900021D7E6 /* TelaInicialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB81ABF22D4C1F900021D7E6 /* TelaInicialView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4253141A2D5554FD005B1C05 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		42573E772D4D3F0500A34AF0 /* CardDesejo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDesejo.swift; sourceTree = "<group>"; };
 		42573E792D4D4AD000A34AF0 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		42573E7B2D4D4E2800A34AF0 /* SheetDesejo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetDesejo.swift; sourceTree = "<group>"; };
 		42573E7D2D4D6C5F00A34AF0 /* TelaDesejosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaDesejosView.swift; sourceTree = "<group>"; };
 		42573E7F2D4D71C600A34AF0 /* TelaDesejosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaDesejosViewModel.swift; sourceTree = "<group>"; };
 		4285B31D2D53FD96002DE21D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		7F29477A2D5E81B40010C079 /* TelaSobreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaSobreView.swift; sourceTree = "<group>"; };
 		7F5874E02D554C8B00877E92 /* Schoolbell-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Schoolbell-Regular.ttf"; sourceTree = "<group>"; };
 		7F6D7F742D52834D00C34A6B /* SheetPostagem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetPostagem.swift; sourceTree = "<group>"; };
 		7F6D7F762D52836800C34A6B /* CardPostagem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPostagem.swift; sourceTree = "<group>"; };
-		7F6D7F782D5283A000C34A6B /* TelaPostagem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaPostagem.swift; sourceTree = "<group>"; };
-		7FE875D72D5282A100917F43 /* TelaPostagemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaPostagemViewModel.swift; sourceTree = "<group>"; };
+		7F6D7F782D5283A000C34A6B /* TelaPostagemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaPostagemView.swift; sourceTree = "<group>"; };
+		7FB3F6CE2D5E69A400781244 /* PostagemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostagemViewModel.swift; sourceTree = "<group>"; };
+		7FB3F6D02D5E787B00781244 /* Categoria.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categoria.swift; sourceTree = "<group>"; };
+		7FB3F6D12D5E787B00781244 /* ListaDesejos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListaDesejos.swift; sourceTree = "<group>"; };
+		7FB3F6D22D5E787B00781244 /* Postagem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Postagem.swift; sourceTree = "<group>"; };
 		7FEC35492D53FDDF0096697D /* SheetDetalhesPostagem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetDetalhesPostagem.swift; sourceTree = "<group>"; };
 		AB5BFE232D4D646B006D4EED /* BotaoCategoria.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BotaoCategoria.swift; sourceTree = "<group>"; };
 		AB65006C2D52831200F38C34 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
@@ -55,7 +65,7 @@
 		AB81ABDC2D4BEEB60021D7E6 /* ViaMemo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ViaMemo.xcdatamodel; sourceTree = "<group>"; };
 		AB81ABEA2D4C1F3E0021D7E6 /* SwiftData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftData.swift; sourceTree = "<group>"; };
 		AB81ABEE2D4C1F6A0021D7E6 /* CardInicial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInicial.swift; sourceTree = "<group>"; };
-		AB81ABF22D4C1F900021D7E6 /* TelaInicial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaInicial.swift; sourceTree = "<group>"; };
+		AB81ABF22D4C1F900021D7E6 /* TelaInicialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaInicialView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,11 +88,28 @@
 			path = TelaDesejos;
 			sourceTree = "<group>";
 		};
+		7F2947792D5E819E0010C079 /* TelaSobre */ = {
+			isa = PBXGroup;
+			children = (
+				7F29477A2D5E81B40010C079 /* TelaSobreView.swift */,
+			);
+			path = TelaSobre;
+			sourceTree = "<group>";
+		};
+		7F29477C2D5E81E80010C079 /* TelaInicial */ = {
+			isa = PBXGroup;
+			children = (
+				AB81ABF22D4C1F900021D7E6 /* TelaInicialView.swift */,
+			);
+			path = TelaInicial;
+			sourceTree = "<group>";
+		};
 		7FE875D62D52827A00917F43 /* TelaPostagem */ = {
 			isa = PBXGroup;
 			children = (
-				7FE875D72D5282A100917F43 /* TelaPostagemViewModel.swift */,
-				7F6D7F782D5283A000C34A6B /* TelaPostagem.swift */,
+				4253141A2D5554FD005B1C05 /* CameraView.swift */,
+				7FB3F6CE2D5E69A400781244 /* PostagemViewModel.swift */,
+				7F6D7F782D5283A000C34A6B /* TelaPostagemView.swift */,
 			);
 			path = TelaPostagem;
 			sourceTree = "<group>";
@@ -155,6 +182,7 @@
 		AB81ABE62D4C16F80021D7E6 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				7FEC35492D53FDDF0096697D /* SheetDetalhesPostagem.swift */,
 				42573E792D4D4AD000A34AF0 /* TabBar.swift */,
 				42573E7B2D4D4E2800A34AF0 /* SheetDesejo.swift */,
 				AB81ABEE2D4C1F6A0021D7E6 /* CardInicial.swift */,
@@ -170,10 +198,10 @@
 		AB81ABE72D4C17010021D7E6 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				7FEC35492D53FDDF0096697D /* SheetDetalhesPostagem.swift */,
+				7F29477C2D5E81E80010C079 /* TelaInicial */,
+				7F2947792D5E819E0010C079 /* TelaSobre */,
 				7FE875D62D52827A00917F43 /* TelaPostagem */,
 				42A56E7B2D515C2200C9F117 /* TelaDesejos */,
-				AB81ABF22D4C1F900021D7E6 /* TelaInicial.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -190,6 +218,9 @@
 		AB81ABE92D4C17480021D7E6 /* SwiftData */ = {
 			isa = PBXGroup;
 			children = (
+				7FB3F6D02D5E787B00781244 /* Categoria.swift */,
+				7FB3F6D12D5E787B00781244 /* ListaDesejos.swift */,
+				7FB3F6D22D5E787B00781244 /* Postagem.swift */,
 				AB81ABEA2D4C1F3E0021D7E6 /* SwiftData.swift */,
 			);
 			path = SwiftData;
@@ -267,24 +298,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB81ABDA2D4BEEB60021D7E6 /* Persistence.swift in Sources */,
+				7FB3F6D32D5E787B00781244 /* Categoria.swift in Sources */,
+				7F29477B2D5E81B40010C079 /* TelaSobreView.swift in Sources */,
 				7FEC354A2D53FDDF0096697D /* SheetDetalhesPostagem.swift in Sources */,
+				7FB3F6D42D5E787B00781244 /* ListaDesejos.swift in Sources */,
 				AB81ABD32D4BEEB50021D7E6 /* ContentView.swift in Sources */,
+				4253141B2D5554FD005B1C05 /* CameraView.swift in Sources */,
 				AB5BFE242D4D646B006D4EED /* BotaoCategoria.swift in Sources */,
 				42573E7C2D4D4E2800A34AF0 /* SheetDesejo.swift in Sources */,
-				AB81ABF32D4C1F900021D7E6 /* TelaInicial.swift in Sources */,
-				7FE875D82D5282A100917F43 /* TelaPostagemViewModel.swift in Sources */,
+				AB81ABF32D4C1F900021D7E6 /* TelaInicialView.swift in Sources */,
 				7F6D7F752D52834D00C34A6B /* SheetPostagem.swift in Sources */,
 				42573E802D4D71C600A34AF0 /* TelaDesejosViewModel.swift in Sources */,
+				7FB3F6CF2D5E69A400781244 /* PostagemViewModel.swift in Sources */,
 				AB81ABDD2D4BEEB60021D7E6 /* ViaMemo.xcdatamodeld in Sources */,
 				42573E7E2D4D6C5F00A34AF0 /* TelaDesejosView.swift in Sources */,
 				AB81ABD12D4BEEB50021D7E6 /* ViaMemoApp.swift in Sources */,
 				AB65006D2D52831200F38C34 /* SearchBar.swift in Sources */,
+				7FB3F6D52D5E787B00781244 /* Postagem.swift in Sources */,
 				AB81ABEB2D4C1F3E0021D7E6 /* SwiftData.swift in Sources */,
 				42573E782D4D3F0500A34AF0 /* CardDesejo.swift in Sources */,
 				7F6D7F772D52836800C34A6B /* CardPostagem.swift in Sources */,
 				AB81ABEF2D4C1F6A0021D7E6 /* CardInicial.swift in Sources */,
 				42573E7A2D4D4AD000A34AF0 /* TabBar.swift in Sources */,
-				7F6D7F792D5283A000C34A6B /* TelaPostagem.swift in Sources */,
+				7F6D7F792D5283A000C34A6B /* TelaPostagemView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,17 +452,20 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"ViaMemo/Preview Content\"";
 				DEVELOPMENT_TEAM = DGB95U3RG5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ViaMemo/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ViaMemo;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -434,9 +473,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = viamemo.ViaMemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -446,17 +489,20 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"ViaMemo/Preview Content\"";
 				DEVELOPMENT_TEAM = DGB95U3RG5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ViaMemo/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ViaMemo;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -464,9 +510,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = viamemo.ViaMemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

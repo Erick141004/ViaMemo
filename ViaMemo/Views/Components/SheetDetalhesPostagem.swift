@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SheetDetalhesPostagem: View {
     let postagem: Postagem
-    @ObservedObject var viewModel: TelaPostagemViewModel
+    @ObservedObject var viewModel: PostagemViewModel
     
     @State private var isEditing: Bool = false
     @State private var tituloEditado: String
@@ -18,7 +18,7 @@ struct SheetDetalhesPostagem: View {
     
     @Environment(\.dismiss) var dismiss
     
-    init(postagem: Postagem, viewModel: TelaPostagemViewModel) {
+    init(postagem: Postagem, viewModel: PostagemViewModel) {
         self.postagem = postagem
         self.viewModel = viewModel
         _tituloEditado = State(initialValue: postagem.titulo ?? "")
