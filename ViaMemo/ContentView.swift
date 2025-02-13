@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import CoreData
 
 struct ContentView: View {
     @State private var primeiraVez: Bool = UserDefaults.standard.bool(forKey: "hasLaunchedBefore") == false
@@ -14,7 +13,7 @@ struct ContentView: View {
     var body: some View {
         Group {
             if primeiraVez {
-                TelaInicial(primeiraVez: $primeiraVez)
+               TelaInicial(primeiraVez: $primeiraVez)
             } else {
                 TabBar()
             }

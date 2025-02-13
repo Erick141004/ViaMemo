@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CardDesejo: View {
     var desejo: ListaDesejos
-    @ObservedObject var viewModel: TelaDesejosViewModel
+    @ObservedObject var viewModel: TelaDesejosViewModelSwiftData
     
     var body: some View {
         GeometryReader { responsivo in
@@ -25,12 +25,12 @@ struct CardDesejo: View {
                     }
                     
                     VStack(alignment: .leading) {
-                        Text(desejo.titulo ?? "Sem título")
+                        Text(desejo.titulo )
                             .foregroundStyle(.white)
                             .fontWeight(.bold)
                             .lineLimit(2)
                         
-                        Text(desejo.local ?? "Local Desconhecido")
+                        Text(desejo.local )
                             .foregroundColor(.white)
                     }
                 }

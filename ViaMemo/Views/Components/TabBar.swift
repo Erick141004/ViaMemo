@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct TabBar: View {
-    @ObservedObject private var postagemViewModel = TelaPostagemViewModel()
-    @ObservedObject private var desejoViewModel = TelaDesejosViewModel()
+    @Environment(\.modelContext) private var modelContext
+    @State private var postagemViewModel: TelaPostagemViewModelSwiftData?
+    @State private var desejoViewModel: TelaDesejosViewModelSwiftData?
     
     @State var tabSelecionado = 1
     
@@ -17,7 +19,12 @@ struct TabBar: View {
         TabView(selection: $tabSelecionado,
                 content:  {
             NavigationStack {
-                TelaPostagem(viewModel: postagemViewModel)
+                if let postagemViewModel {
+                    TelaPostagem(viewModel: postagemViewModel)
+               } else {
+                   ProgressView()
+               }
+                
             }
             .tabItem {
                 Text("Memórias")
@@ -25,7 +32,11 @@ struct TabBar: View {
             }.tag(1)
             
             NavigationStack {
-                TelaDesejosView(viewModel: desejoViewModel)
+                if let desejoViewModel {
+                   TelaDesejosView(viewModel: desejoViewModel)
+               } else {
+                   ProgressView()
+               }
             }
             .tabItem {
                 Text("Desejos")
@@ -33,9 +44,15 @@ struct TabBar: View {
             }.tag(2)
             
         })
+        .onAppear(){
+            if desejoViewModel == nil {
+                desejoViewModel = TelaDesejosViewModelSwiftData(modelContext: modelContext)
+            }
+            
+            if postagemViewModel == nil{
+                postagemViewModel = TelaPostagemViewModelSwiftData(modelContext: modelContext)
+            }
+        }
     }
 }
 
-#Preview {
-    TabBar()
-}

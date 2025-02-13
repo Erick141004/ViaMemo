@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 struct SheetDesejo: View {
-    @ObservedObject var viewModel: TelaDesejosViewModel
+    @ObservedObject var viewModel: TelaDesejosViewModelSwiftData
     @Environment(\.dismiss) var dismiss
     @State var categoriaSelecionada: String = "Montanha ⛰️"
     @StateObject var categoriaViewModel = BotaoCategoriaViewModel()
@@ -64,9 +64,3 @@ struct SheetDesejo: View {
     
 }
 
-
-#Preview {
-    var vm = TelaDesejosViewModel()
-    
-    return SheetDesejo(viewModel: vm)
-}

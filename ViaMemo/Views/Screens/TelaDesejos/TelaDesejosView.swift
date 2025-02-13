@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 struct TelaDesejosView: View {
-    @ObservedObject var viewModel: TelaDesejosViewModel
+    @StateObject var viewModel: TelaDesejosViewModelSwiftData
     @State var mostrarSheet = false
     @StateObject var categoriaViewModel = BotaoCategoriaViewModel()
     @State private var procurar: String = ""
@@ -27,7 +27,7 @@ struct TelaDesejosView: View {
                             categoria: categoria,
                             tapCategoria: {
                                 let categoriaExtraida = categoriaViewModel.extrairCategoria(categoria: categoria)
-                                let _ = viewModel.filtrarPorCategoria(nome: categoriaExtraida)
+                                let _ = viewModel.filtrarPorCategoria(categoria: categoriaExtraida)
                                 viewModel.fetchDesejos()
                                 
                                 if categoriaSelecionada != categoria{

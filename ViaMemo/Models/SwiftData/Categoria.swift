@@ -10,12 +10,14 @@ import Foundation
 import SwiftData
 
 
-@Model public class Categoria {
-    var nome: String?
+@Model
+class Categoria {
+    var nome: String
     var categoriaDesejo: [ListaDesejos]?
     var categoriaPostagem: [Postagem]?
-    public init() {
-
+    
+    init(nome: String) {
+        self.nome = nome
     }
     
 }

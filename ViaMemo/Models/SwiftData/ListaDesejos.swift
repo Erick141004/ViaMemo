@@ -10,12 +10,15 @@ import Foundation
 import SwiftData
 
 
-@Model public class ListaDesejos {
-    var local: String?
-    var titulo: String?
+@Model 
+class ListaDesejos {
+    var local: String
+    var titulo: String
     var desejoCategoria: Categoria?
-    public init() {
 
+    public init(local: String, titulo: String, desejoCategoria: Categoria?) {
+        self.local = local
+        self.titulo = titulo
     }
     
 }

@@ -9,7 +9,7 @@ import SwiftUI
 import PhotosUI
 
 struct SheetPostagem: View {
-    @ObservedObject var viewModel: TelaPostagemViewModel
+    @ObservedObject var viewModel: TelaPostagemViewModelSwiftData
     @Environment(\.dismiss) var dismiss
     @State var categoriaSelecionada: String = "Montanha ⛰️"
     @StateObject var categoriaViewModel = BotaoCategoriaViewModel()
@@ -98,10 +98,4 @@ struct SheetPostagem: View {
         categoriaSelecionada = ""
     }
     
-}
-
-#Preview {
-    var vm = TelaPostagemViewModel()
-    
-    return SheetPostagem(viewModel: vm)
 }

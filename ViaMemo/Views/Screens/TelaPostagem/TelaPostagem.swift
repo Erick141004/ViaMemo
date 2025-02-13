@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct TelaPostagem: View {
-    @ObservedObject var viewModel: TelaPostagemViewModel
+    @StateObject var viewModel: TelaPostagemViewModelSwiftData
+    
     @State private var mostrarSheet = false
     @State private var postagemSelecionada: Postagem?
     @State private var procurar: String = ""
@@ -57,7 +58,7 @@ struct TelaPostagem: View {
             }
             .padding(.bottom, 5)
             
-            if viewModel.postagens.isEmpty {
+            if $viewModel.postagens.isEmpty {
                 if viewModel.buscaAtiva {
                     ContentUnavailableView.search(text: viewModel.textoProcura)
                 } else {
