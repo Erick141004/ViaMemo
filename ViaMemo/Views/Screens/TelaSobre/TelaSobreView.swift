@@ -6,11 +6,11 @@ import SwiftUI
 struct TelaSobreView: View {
     let termosTexto = """
     Termos de Uso
-
+    
     Ao utilizar a aplicação Viamemo, você concorda com os termos e condições estabelecidos abaixo.
     
     É importante que você leia atentamente este documento, pois ele descreve as regras e responsabilidades ao usar o nosso aplicativo.
-
+    
     1. Descrição do Serviço
     
         A aplicação Viamemo tem como objetivo permitir que os usuários registrem e organizem suas viagens, salvando fotos, endereços, notas e planejando futuras viagens.
@@ -46,7 +46,7 @@ struct TelaSobreView: View {
     
     let politicaTexto = """
     Política de Privacidade
-
+    
     Sua privacidade é importante para nós. Esta política explica como coletamos, usamos e protegemos suas informações pessoais.
     
     Para a solução de controvérsias decorrentes do presente instrumento será aplicado integralmente o Direito brasileiro.
@@ -58,10 +58,7 @@ struct TelaSobreView: View {
     @State private var showPolitica = false
     
     var body: some View {
-        ZStack {
-            Color(red: 2/255, green: 29/255, blue: 29/255)
-                .edgesIgnoringSafeArea(.all)
-            
+        ScrollView {
             VStack {
                 Button(action: {
                     withAnimation(.easeInOut(duration: 0.2)) {
@@ -81,24 +78,21 @@ struct TelaSobreView: View {
                             .foregroundColor(Color.white)
                     }
                     .padding()
-                    .background(Color.black.opacity(0.4))
+                    .background(Color.verdePrincipal)
                     .cornerRadius(10)
                     .padding(.horizontal)
                 }
                 
                 if showTermos {
-                    ScrollView {
-                        Text(termosTexto)
-                            .foregroundColor(.white)
-                            .font(.body)
-                            .padding()
-                            .background(Color.black.opacity(0.4))
-                            .cornerRadius(10)
-                            .padding(.horizontal)
-                    }
-                    .transition(.opacity)
+                    Text(termosTexto)
+                        .foregroundColor(.white)
+                        .font(.body)
+                        .padding()
+                        .background(Color.verdePrincipal)
+                        .cornerRadius(10)
+                        .padding(.horizontal)
                 }
-                            
+                
                 Button(action: {
                     withAnimation(.easeInOut(duration: 0.2)) {
                         showPolitica.toggle()
@@ -116,28 +110,26 @@ struct TelaSobreView: View {
                             .foregroundColor(Color.white)
                     }
                     .padding()
-                    .background(Color.black.opacity(0.4))
+                    .background(Color.verdePrincipal)
                     .cornerRadius(10)
                     .padding(.horizontal)
                 }
                 
                 if showPolitica {
-                    ScrollView {
-                        Text(politicaTexto)
-                            .foregroundColor(.white)
-                            .font(.body)
-                            .padding()
-                            .background(Color.black.opacity(0.4))
-                            .cornerRadius(10)
-                            .padding(.horizontal)
-                    }
-                    .transition(.opacity)
+                    Text(politicaTexto)
+                        .foregroundColor(.white)
+                        .font(.body)
+                        .padding()
+                        .background(Color.verdePrincipal)
+                        .cornerRadius(10)
+                        .padding(.horizontal)
                 }
                 
                 Spacer()
             }
-            .padding(.top)
+            .padding(.top, 10)
         }
+        .background(Color.fundo)
         .navigationTitle("Via Memo")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
