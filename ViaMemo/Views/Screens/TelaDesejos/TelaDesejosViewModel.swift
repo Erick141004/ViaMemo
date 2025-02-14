@@ -75,6 +75,9 @@ class TelaDesejosViewModel: ObservableObject {
                     desejo.titulo.localizedCaseInsensitiveContains(textoProcura) ||
                     desejo.local.localizedCaseInsensitiveContains(textoProcura)
                 }
+                buscaAtiva = true
+            } else {
+                buscaAtiva = false
             }
             
             if let categoria = categoriaSelecionada {

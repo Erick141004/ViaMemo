@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TelaInicial: View {
     @Binding var primeiraVez: Bool
-
+    
     var body: some View {
         VStack {
             Spacer()
@@ -46,9 +46,11 @@ struct LogoInicial: View {
 
 struct InfosIniciais: View {
     @Binding var primeiraVez: Bool
+    @State private var isPresentedTermos = false
+    @State private var isPresentedPoliticas = false
 
     var body: some View {
-        VStack(alignment: .center, spacing: 30) {
+        VStack(alignment: .center, spacing: 20) {
             Text("ViaMemo")
                 .font(.custom("Schoolbell-Regular", size: 50))
                 .padding(.top, 10)
@@ -58,7 +60,6 @@ struct InfosIniciais: View {
                 .multilineTextAlignment(.center)
 
             Button {
-                // Marca que o app já foi aberto
                 UserDefaults.standard.set(true, forKey: "hasLaunchedBefore")
                 primeiraVez = false
             } label: {
@@ -67,17 +68,18 @@ struct InfosIniciais: View {
                         .font(.system(size: 20))
                         .foregroundStyle(Color.white)
                 }
-                .frame(minWidth: 300, minHeight: 42)
+                .frame(maxWidth: 300, minHeight: 42)
                 .background(Color("verdeBotao"))
                 .clipShape(RoundedRectangle(cornerRadius: 50))
             }
+            }
+            .padding(.horizontal, 30)
+            .frame(maxWidth: .infinity, minHeight: 400)
+            .background(Color("fundo"))
+            .clipShape(RoundedRectangle(cornerRadius: 60))
         }
-        .padding(.horizontal, 30)
-        .frame(minWidth: 400, minHeight: 400)
-        .background(Color("fundo"))
-        .clipShape(RoundedRectangle(cornerRadius: 60))
     }
-}
+
 
 #Preview {
     TelaInicial(primeiraVez: .constant(true))

@@ -73,6 +73,9 @@ class PostagemViewModel: NSObject, ObservableObject, UINavigationControllerDeleg
                     postagem.bairro.localizedCaseInsensitiveContains(textoProcura) ||
                     postagem.cidade.localizedCaseInsensitiveContains(textoProcura)
                 }
+                buscaAtiva = true
+            } else {
+                buscaAtiva = false
             }
             
             if let categoria = categoriaSelecionada {
