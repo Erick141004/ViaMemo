@@ -56,7 +56,7 @@ struct TelaPostagem: View {
             .padding(.bottom, 5)
             
             if viewModel.postagens.isEmpty {
-                if viewModel.buscaAtiva {
+                if viewModel.buscaAtiva && viewModel.existePostagem(){
                     ContentUnavailableView.search(text: viewModel.textoProcura)
                 } else {
                     ContentUnavailableView{

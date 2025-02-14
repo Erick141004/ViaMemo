@@ -39,6 +39,17 @@ class PostagemViewModel: NSObject, ObservableObject, UINavigationControllerDeleg
         fetchPostagens()
     }
     
+    func existePostagem() -> Bool {
+        do {
+            let fetchDescriptor = FetchDescriptor<PostagemSwiftData>()
+            let postagens = try modelContext.fetch(fetchDescriptor)
+            return !postagens.isEmpty
+        } catch {
+            print("Error fetching postagens: \(error)")
+            return false
+        }
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let local = locations.last {
             localAtual = local

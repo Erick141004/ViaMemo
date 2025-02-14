@@ -62,6 +62,17 @@ class TelaDesejosViewModel: ObservableObject {
         return nil
     }
     
+    func existeDesejo() -> Bool {
+        do {
+            let fetchDescriptor = FetchDescriptor<ListaDesejosSwiftData>()
+            let desejos = try modelContext.fetch(fetchDescriptor)
+            return !desejos.isEmpty
+        } catch {
+            print("Error fetching postagens: \(error)")
+            return false
+        }
+    }
+    
     func fetchDesejos() {
         do {
             let request = FetchDescriptor<ListaDesejosSwiftData>(

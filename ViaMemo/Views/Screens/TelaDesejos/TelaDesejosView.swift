@@ -49,10 +49,14 @@ struct TelaDesejosView: View {
             }
             
             if viewModel.desejos.isEmpty {
-                ContentUnavailableView {
-                    Label("Nenhum desejo", image: "coqueiro")
-                } description: {
-                    Text("Comece criando seu primeiro desejo!")
+                if viewModel.buscaAtiva && viewModel.existeDesejo(){
+                    ContentUnavailableView.search(text: viewModel.textoProcura)
+                } else {
+                    ContentUnavailableView {
+                        Label("Nenhum desejo", image: "coqueiro")
+                    } description: {
+                        Text("Comece criando seu primeiro desejo!")
+                    }
                 }
             }
             else {
