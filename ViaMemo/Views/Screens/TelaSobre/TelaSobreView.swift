@@ -4,56 +4,6 @@
 import SwiftUI
 
 struct TelaSobreView: View {
-    let termosTexto = """
-    Termos de Uso
-    
-    Ao utilizar a aplicação Viamemo, você concorda com os termos e condições estabelecidos abaixo.
-    
-    É importante que você leia atentamente este documento, pois ele descreve as regras e responsabilidades ao usar o nosso aplicativo.
-    
-    1. Descrição do Serviço
-    
-        A aplicação Viamemo tem como objetivo permitir que os usuários registrem e organizem suas viagens, salvando fotos, endereços, notas e planejando futuras viagens.
-    
-        O uso da aplicação está sujeito aos termos e condições aqui estabelecidos.
-    
-    2. Propriedade intelectual
-    3. Responsabilidades
-    
-    Ao utilizar a aplicação Viamemo, você concorda em:
-    
-      1) Fornecer informações precisas e atualizadas.
-      2) Manter a confidencialidade de sua senha e conta.
-      3) Não utilizar a aplicação para fins ilegais ou não autorizados.
-      4) Ser responsável por todas as atividades realizadas em sua conta.
-    
-    4. Alterações nos Termos
-    5. Limitação de Responsabilidade
-    
-    A equipe de desenvolvimento da Viamemo não será responsável por:
-    
-      1) Danos diretos ou indiretos resultantes do uso ou incapacidade de uso da aplicação.
-      2) Perda de dados ou informações devido a falhas técnicas ou de segurança.
-      3) Conteúdos gerados por terceiros ou links externos disponíveis na aplicação.
-                                                     
-    6. Alterações nos Termos de Uso
-    
-    Este Termo de Uso é regido pela legislação brasileira. A estrutura do site ou aplicativo, as marcas, logotipos, nomes comerciais, layouts, gráficos e design de interface, imagens, ilustrações, fotografias, apresentações, vídeos, conteúdos escritos e de som e áudio, programas de computador, banco de dados, arquivos de transmissão e quaisquer outras informações e direitos de propriedade intelectual de Luisiana Ramirez, Camila de Abreu, Erick Costa, Carla Brito, Bruna Kinjo**, observados os termos da **Lei da Propriedade Industrial (Lei nº 9.279/96), Lei de Direitos Autorais (Lei n° 9.610/98) e Lei do Software (Lei n° 9.609/98), estão devidamente reservados.
-    
-    Este Termo de Uso não cede ou transfere ao usuário qualquer direito, de modo que o acesso não gera qualquer direito de propriedade intelectual ao usuário, exceto pela licença limitada ora concedida.
-    O uso da plataforma pelo usuário é pessoal, individual e intransferível, sendo vedado qualquer uso não autorizado, comercial ou não-comercial. Tais usos consistirão em violação dos direitos de propriedade intelectual de **Luisiana Ramirez, Camila de Abreu, Erick Costa, Carla Brito, Bruna Kinjo**, puníveis nos termos da legislação aplicável.
-    """
-    
-    let politicaTexto = """
-    Política de Privacidade
-    
-    Sua privacidade é importante para nós. Esta política explica como coletamos, usamos e protegemos suas informações pessoais.
-    
-    Para a solução de controvérsias decorrentes do presente instrumento será aplicado integralmente o Direito brasileiro.
-    
-    Os eventuais litígios deverão ser apresentados no foro da comarca em que se encontra a sede da empresa.
-    """
-    
     @State private var showTermos = false
     @State private var showPolitica = false
     
@@ -84,13 +34,37 @@ struct TelaSobreView: View {
                 }
                 
                 if showTermos {
-                    Text(termosTexto)
-                        .foregroundColor(.white)
-                        .font(.body)
-                        .padding()
-                        .background(Color.verdePrincipal)
-                        .cornerRadius(10)
-                        .padding(.horizontal)
+                    Text("""
+    **1. Introdução**
+    \nAo acessar e utilizar a aplicação **Viamemo**, você concorda com os termos e condições estabelecidos neste documento. Caso não concorde com qualquer item, recomenda-se que não utilize a aplicação.
+    \nEste documento descreve as regras, direitos e responsabilidades dos usuários ao utilizar o **Viamemo**. A leitura atenta e a compreensão desses termos são essenciais para garantir uma experiência segura e adequada.
+    \n**2. Descrição do Serviço**
+    \nO **Viamemo** é um aplicativo que permite aos usuários registrarem e organizarem suas viagens, salvando fotos, endereços, notas e planejando futuras viagens.
+    \nO uso da aplicação está sujeito aos termos e condições aqui estabelecidos, podendo ser alterados a qualquer momento mediante aviso prévio.
+    \n**3. Propriedade Intelectual**
+    \nTodos os direitos de propriedade intelectual relacionados à aplicação, incluindo estrutura, layout, design, código-fonte, logotipos, marcas, ilustrações, textos e demais elementos visuais e funcionais pertencem exclusivamente a **Luisiana Ramirez, Camila de Abreu, Erick Costa, Carla Brito e Bruna Kinjo**.
+    \nO uso da aplicação é concedido ao usuário de forma **limitada, pessoal, intransferível e revogável**, sendo vedada qualquer forma de cópia, reprodução, modificação, distribuição ou comercialização sem autorização expressa.
+    \n**4. Responsabilidades do Usuário**
+    \nAo utilizar a aplicação **Viamemo**, você concorda em:
+    \n- Não utilizar a aplicação para fins ilegais, fraudulentos ou não autorizados.
+    - Respeitar os direitos de terceiros, incluindo propriedade intelectual, privacidade e segurança.
+    - Não praticar atos que possam comprometer a segurança da plataforma, como disseminação de vírus, spam ou tentativas de invasão.
+    \n**5. Limitação de Responsabilidade**
+    \nA equipe de desenvolvimento da **Viamemo** não será responsável por:
+    \n- Danos diretos, indiretos, incidentais ou consequenciais resultantes do uso ou impossibilidade de uso da aplicação.
+    - Perda de dados ou informações devido a falhas técnicas, ataques cibernéticos ou outros eventos imprevistos.
+    - Qualquer erro, interrupção ou mau funcionamento que possa afetar a experiência do usuário.
+    \n**6. Alterações nos Termos de Uso**
+    \nOs **Termos de Uso** podem ser atualizados periodicamente para refletir mudanças na legislação ou melhorias na aplicação. O usuário será notificado sobre alterações significativas, e a continuidade do uso da plataforma implica aceitação dos novos termos.
+    \n**7. Legislação Aplicável e Foro**
+    \nEstes **Termos de Uso** são regidos e interpretados de acordo com as leis da **República Federativa do Brasil**. Quaisquer disputas ou controvérsias decorrentes do uso da aplicação serão resolvidas no foro da comarca de domicílio do usuário ou, caso este resida fora do Brasil, no foro da cidade de **São Paulo - SP**.
+    """)
+                    .foregroundColor(.white)
+                    .font(.body)
+                    .padding()
+                    .background(Color.verdePrincipal)
+                    .cornerRadius(10)
+                    .padding(.horizontal)
                 }
                 
                 Button(action: {
@@ -116,13 +90,24 @@ struct TelaSobreView: View {
                 }
                 
                 if showPolitica {
-                    Text(politicaTexto)
-                        .foregroundColor(.white)
-                        .font(.body)
-                        .padding()
-                        .background(Color.verdePrincipal)
-                        .cornerRadius(10)
-                        .padding(.horizontal)
+                    Text("""
+    **1. Informações Coletadas**
+    \nO **ViaMemo** não coleta nem armazena dados pessoais identificáveis dos usuários. No entanto, para que algumas funcionalidades do aplicativo sejam oferecidas corretamente, solicitamos permissões para acessar determinados recursos do seu dispositivo:
+    \n- **Localização**: Utilizada para permitir que o usuário registre e visualize locais em seu histórico de viagens.
+    - **Câmera**: Utilizada para capturar fotos diretamente no aplicativo e adicioná-las aos registros de viagem.
+    - **Galeria**: Utilizada para permitir que o usuário selecione imagens armazenadas no dispositivo e as adicione ao aplicativo.
+    \nEssas permissões são utilizadas estritamente para oferecer a funcionalidade proposta pelo **ViaMemo** e não são compartilhadas com terceiros.
+    \n**2. Compartilhamento de Dados**
+    \nO **ViaMemo** não compartilha, vende ou transfere informações dos usuários para terceiros. O aplicativo também não armazena dados em servidores externos, garantindo que todas as informações permaneçam exclusivamente no dispositivo do usuário.
+    \n**3. Alterações nesta Política**
+    \nPodemos atualizar esta **Política de Privacidade** periodicamente. Qualquer alteração será comunicada por meio do aplicativo. O uso contínuo do **ViaMemo** após as atualizações será considerado como aceitação dos novos termos.
+    """)
+                    .foregroundColor(.white)
+                    .font(.body)
+                    .padding()
+                    .background(Color.verdePrincipal)
+                    .cornerRadius(10)
+                    .padding(.horizontal)
                 }
                 
                 Spacer()
